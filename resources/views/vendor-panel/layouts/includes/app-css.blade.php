@@ -131,6 +131,10 @@
         border-top-color: #2e0789 !important;
     }
 
+    .irs-from, .irs-to{
+      visibility: visible !important;
+    }
+
     select, .drpdwn {
             -webkit-appearance: none !important;
             -moz-appearance: none !important;
@@ -370,6 +374,18 @@
 
     .branch-wrapper {
         margin: 2% 0 2% 0;
+    }
+
+    .notification-dot{
+      display: inline-block;
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+      background: #F91616;
+      /* border: 1px solid #2E0789; */
+      position: absolute;
+      left: 5px;
+      top: 0px;
     }
 
 

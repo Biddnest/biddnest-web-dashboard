@@ -2,6 +2,8 @@
  * Copyright (c) 2021. This Project was built and maintained by Diginnovators Private Limited.
  */
 
+import { redirectTo } from "./helpers.js";
+
 export function initMapPicker() {
     var lat = $('#source-lat').val();
     var lng = $('#source-lng').val();
@@ -1243,9 +1245,15 @@ export function initRangeSlider() {
             from: $(this).data("from"),
             to: $(this).data("to"),
             skin: "round",
+            decorate_both: true,
+            grid: false,
+            values_separator: " - ",
             step: $(this).data("step"),
             keyboard: true,
             hide_min_max: true,
+            // hide_from_to: true,
+
+            // force_edges: true,
 
         });
     }
@@ -1338,4 +1346,39 @@ export function initInventoryDropzone() {
             }
         });
     }
+}
+
+export function initSocket(){
+  if ($(".main-content").data("barba-namespace") == "vendor-orderdetail") {
+    console.log("Initing socket");
+
+      socket.emit("booking.listen.start", {
+        data:{
+          public_booking_id : $("#current-booking-id").val(),
+          organization_id : $("#current-org-id").val(),
+          watcher_id : $("#current-watcher-id").val(),
+        },
+        bypass_auth: true
+      });
+
+      socket.emit("booking.watch.start", {
+        data:{
+          public_booking_id : $("#current-booking-id").val(),
+          organization_id : $("#current-org-id").val(),
+          watcher_id : $("#current-watcher-id").val(),
+        },
+        bypass_auth: true
+      });
+
+      socket.on("booking.rejected", (data)=>{
+        console.log("Listened booking rejected");
+        $(".bidding-actions").addClass("hidden");
+        // if(confirm("Somebody from your organization has rejected this booking. You will be taken to live orders."))
+          // location.assign('{{route('vendor.bookings', ['type'=>"live"])}}');
+      });
+
+  }
+  else{
+
+  }
 }

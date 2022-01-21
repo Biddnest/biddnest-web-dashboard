@@ -2,7 +2,10 @@
 @section('title') Order Details @endsection
 @section('body')
 
-    <div class="main-content grey-bg" data-barba="container" data-barba-namespace="orderdetail">
+    <div class="main-content grey-bg" data-barba="container" data-barba-namespace="vendor-orderdetail">
+      <input type="hidden" id="current-booking-id" value="{{request()->id}}" />
+      <input type="hidden" id="current-org-id" value="{{ session('organization_id') }}" />
+      <input type="hidden" id="current-watcher-id" value="{{ session('account')['id'] }}" />
         <div class="d-flex  flex-row justify-content-between vertical-center">
             <h3 class="page-head text-left p-4 f-20 theme-text">Order Details</h3>
             <div class="mr-20">
@@ -74,7 +77,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link" id="requirments-tab" href="{{route('vendor.my-bid',['id'=>$booking->public_booking_id])}}">My Bid</a>
                                     </li>
-                                   
+
                                 @elseif($booking->bid->status == \App\Enums\BidEnums::$STATUS['won'] && $booking->status == \App\Enums\BookingEnums::$STATUS['payment_pending'])
                                    {{-- <li class="nav-item">
                                         <a class="nav-link disabled" id="requirments-tab" href="{{route('vendor.my-quote',['id'=>$booking->public_booking_id])}}">My Quote</a>
@@ -85,7 +88,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link " id="requirments-tab" href="{{route('vendor.schedule-order',['id'=>$booking->public_booking_id])}}">Schedule</a>
                                     </li>
-                                
+
                                 @elseif($booking->bid->status == \App\Enums\BidEnums::$STATUS['won'] && (($booking->status > \App\Enums\BookingEnums::$STATUS['payment_pending']) && ($booking->status < \App\Enums\BookingEnums::$STATUS['in_transit'])))
                                     <li class="nav-item">
                                         <a class="nav-link" id="requirments-tab" href="{{route('vendor.my-bid',['id'=>$booking->public_booking_id])}}">My Bid</a>
@@ -221,7 +224,7 @@
                                             <div class="theme-text f-14 p-8">
                                                 @if($bidding->status == \App\Enums\BidEnums::$STATUS['won'])
                                                 Rs. {{$bidding->bid_amount}}
-                                                @else    
+                                                @else
                                                     Rs. {{$booking->organization_rec_quote}}
                                                 @endif
                                             </div>
@@ -232,13 +235,15 @@
                                                     @foreach(json_decode($booking->movement_dates, true) as $mdate)
                                                         <span class="status-3">{{date("d M Y", strtotime($mdate['date']))}}</span>
                                                     @endforeach
-                                                @endif        
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="border-top">
-                                    <div class="d-flex pb-2 pt-1 justify-content-end button-section">
+
+
+                                    <div class="d-flex pb-2 pt-1 justify-content-end button-section bidding-actions @if($bidding->watcher_id && $bidding->watcher_id != session('account')['id']) hidden @endif">
                                         @if($booking->bid->status == \App\Enums\BidEnums::$STATUS['active'])
                                             <a href="#" class="bookings inline-icon-button" data-url="{{route('api.booking.bookmark', ['id'=>$booking->public_booking_id])}}" data-confirm="Do you want add this booking in Bookmarked?">
                                                 <button class="btn theme-br theme-text  white-bg  justify-content-center">Quote Later</button>
@@ -251,6 +256,7 @@
                                             </a>
                                         @endif
                                     </div>
+
                                 </div>
                             </div>
                             <!--  -->
@@ -280,7 +286,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12  p-0  pb-0" >
-                                    
+
                                     <table class="table text-left theme-text tb-border2" id="items" >
                                         <thead class="secondg-bg bx-shadowg p-0 f-14">
                                         <tr class="">
@@ -396,7 +402,7 @@
                                             <label class="full-name">Minimum and  Maximum Number Of Man Power</label>
                                             <div class="d-felx justify-content-between" style="margin-top: 10px !important; ">
                                                 <div class="d-flex range-input-group justify-content-between flex-row">
-                                                    <input type="text" class="custom_slider custom_slider_1 range validate-input"  name="man_power"  data-min="0" data-max="100" data-from="0" data-to="100" data-type="double" data-step="1" />
+                                                    <input type="text" class="custom_slider"  name="man_power"  data-min="0" data-max="100" data-from="0" data-to="100" data-type="double" data-step="1" />
                                                 </div>
                                             </div>
                                             <span class="error-message">Please enter valid </span>

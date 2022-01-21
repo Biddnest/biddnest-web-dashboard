@@ -489,7 +489,7 @@ class BookingsController extends Controller
             ->update([
                 "meta" => json_encode($meta)
             ]);
-        
+
         Booking::where(["public_booking_id" => $public_booking_id])
         ->update([
             "final_moving_date"=>Carbon::parse($date)->format('Y-m-d'),
@@ -612,7 +612,7 @@ class BookingsController extends Controller
                 break;
         }
 
-        
+
 
         $bookings = Booking::whereIn("id", $bid_id->pluck('booking_id'))
             ->whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['in_progress'],
@@ -620,7 +620,7 @@ class BookingsController extends Controller
 //                BookingEnums::$STATUS['price_review_pending']
             ]);
 
-            
+
 
         if ($web) {
             if (isset($request->search)) {
@@ -631,7 +631,7 @@ class BookingsController extends Controller
             }
         }
 
-        
+
 
         $bookings->orderBy('id', 'DESC')->with('user');
         if ($request->type == "participated" || $request->type == "past")
@@ -851,7 +851,7 @@ class BookingsController extends Controller
 
     public static function startTrip($public_booking_id, $organization_id, $pin)
     {
-        
+
         $booking = Booking::where([
             "public_booking_id" => $public_booking_id,
             "organization_id" => $organization_id,
@@ -878,7 +878,7 @@ class BookingsController extends Controller
             $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['in_transit']);
             $user_id=$booking->user_id;
             $driver_id = $booking->driver->id;
-            
+
             dispatch(function () use ($booking, $user_id, $public_booking_id, $driver_id) {
 
                 $phone = User::where(['id'=>$user_id])->pluck('phone')[0];
@@ -1028,19 +1028,24 @@ class BookingsController extends Controller
     /*apis for websocket running in websocket.js*/
     public static function startVendorWatch($request)
     {
+
+
+      $token = null;
+      if(!$request['bypass_auth']){
         $token = (object)Helper::validateAuthToken($request['token']);
         $vendor = Vendor::find($token->payload->id);
         if (!$token || !$vendor)
             return Helper::response(false, "Token validation failed.");
+        }
 
         Bid::where("booking_id", Booking::where('public_booking_id', $request['data']['public_booking_id'])->pluck('id')[0])
-            ->where("organization_id", $token->payload->organization_id)
+            ->where("organization_id", $request['bypass_auth'] ? $request['data']['organization_id'] : $token->payload->organization_id)
             ->update([
-                "watcher_id" => $token->payload->id
+                "watcher_id" => $request['bypass_auth'] ? $request['data']['watcher_id'] : $token->payload->id
             ]);
 
-        return Helper::response(true, "Watching Started", ["booking" => Booking::where('public_booking_id', $request['data']['public_booking_id'])->with(["bid" => function ($query) use ($token) {
-            $query->where("organization_id", $token->payload->organization_id)->with('watched_by');
+        return Helper::response(true, "Watching Started", ["booking" => Booking::where('public_booking_id', $request['data']['public_booking_id'])->with(["bid" => function ($query) use ($token, $request) {
+            $query->where("organization_id", $request['bypass_auth'] ? $request['data']['organization_id'] : $token->payload->organization_id)->with('watched_by');
         }])->first()]);
 
 
@@ -1048,20 +1053,24 @@ class BookingsController extends Controller
 
     public static function stopVendorWatch($request)
     {
+      $token = null;
+      if(!$request['bypass_auth']){
         $token = (object)Helper::validateAuthToken($request['token']);
         $vendor = Vendor::find($token->payload->id);
         if (!$token || !$vendor)
             return Helper::response(false, "Token validation failed.");
+        }
 
         Bid::where("booking_id", Booking::where('public_booking_id', $request['data']['public_booking_id'])->pluck('id')[0])
-            ->where("watcher_id", $token->payload->id)
-            ->where("organization_id", $token->payload->organization_id)
+            ->where("watcher_id", $request['bypass_auth'] ? $request['data']['watcher_id'] : $token->payload->id)
+            ->where("organization_id", $request['bypass_auth'] ? $request['data']['organization_id'] : $token->payload->organization_id)
             ->update([
                 "watcher_id" => null
             ]);
 
-        return Helper::response(true, "Watching Ended", ["booking" => Booking::where('public_booking_id', $request['data']['public_booking_id'])->with(["bid" => function ($query) use ($token) {
-            $query->where("organization_id", $token->payload->organization_id)->with('watched_by');
+        return Helper::response(true, "Watching Ended", ["booking" => Booking::where('public_booking_id', $request['data']['public_booking_id'])->with(["bid" => function ($query) use ($token, $request) {
+            $query->where("organization_id", $request['bypass_auth'] ? $request['data']['organization_id'] : $token->payload->organization_id)
+            ->with('watched_by');
         }])->first()]);
 
     }

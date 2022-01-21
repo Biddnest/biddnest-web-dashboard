@@ -61,6 +61,9 @@ const env = "development";
 if (env != "development")
     Logger.setLevel(Logger.OFF);
 
+
+    
+
 // getLocationPermission();
 
 /*Callback for hero form submit - always keep at top (has conflict issue)*/

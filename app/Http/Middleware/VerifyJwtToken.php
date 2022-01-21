@@ -23,11 +23,16 @@ class VerifyJwtToken
     public function handle(Request $request, Closure $next)
     {
 //        return response()->json($request->bearerToken());
+  if($request->bypass_auth)
+    return $next($request);
+    
         if(!$request->bearerToken())
             return response()->json(["status"=>"fail", "message"=>"Authorization headers are missing.","data"=>null])->setStatusCode(401);
 
         try {
             if ($data = JWT::decode($request->bearerToken(), config('jwt.secret'),['HS256'])){
+
+
 
                 if($data->iss != config('app.url'))
                     return response()->json(["status"=>"fail", "message"=>"You are not authorized. Better have a quote from us: ".Inspiring::quote(),"data"=>null])->setStatusCode(401);

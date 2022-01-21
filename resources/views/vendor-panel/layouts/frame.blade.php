@@ -26,12 +26,19 @@
                     </div>
                 </form>
 
+                @php $nots = \App\Models\Notification::where(['vendor_id'=>\Illuminate\Support\Facades\Session::get('account')['id'], "is_read"=> \App\Enums\CommonEnums::$NO])->orderBy("created_at")->limit(50)->get(); @endphp
                 <div class="col-5">
                     <ul class="header-controls d-flex flex-row justify-content-end">
-                        <li class="notifications"><a href="#"><span class="icon-navbar"><i class="icon dripicons-bell notification-icon"height="15"></i></span></a>
-                            <div class="dropdown">
+                        <li class="notifications"><a><span class="icon-navbar">
+                          <i class="icon dripicons-bell notification-icon" height="15"></i>
+                          @if(count($nots))
+                          <span class="notification-dot"></span>
+                          @endif
+                        </span></a>
+                            <div class="dropdown" style="max-height: 60vh !important; overflow-y: auto;">
                                 <ul>
-                                    @foreach(\App\Models\Notification::where(['vendor_id'=>\Illuminate\Support\Facades\Session::get('account')['id'], "generated_by"=>\App\Enums\NotificationEnums::$GENERATE_BY['admin']])->latest()->limit(10)->get() as $notification)
+
+                                    @foreach($nots as $notification)
                                         <li><a href="{{$notification->url ?? '#'}}">
                                                 <div class="d-flex notification-msg ">
                                                     <div class="order-icon">
@@ -45,6 +52,14 @@
                                             </a>
                                         </li>
                                     @endforeach
+                                    @if(!count($nots))
+                                    <li><a href="#">
+                                            <div class="d-flex notification-msg" style="text-align: center !important; display: block !important;">
+                                                    <h6 class="text-center" style="text-align: center !important; display: block !important;"><i>Sorry you have no notifications yet.</i></h6>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    @endif
                                 </ul>
                             </div>
 

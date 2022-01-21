@@ -73,6 +73,7 @@
 <script>
     const IMAGE_PLACEHOLDER = '{{asset('static/images/upload-image.svg')}}';
     const API_SEARCH_USERS = '{{route('search_user')}}';
+    const SOCKET_SERVER_URL = "{{ (env('SECURE_SOCKET') ? "https://" : "http://") . env("APP_IP").":".env('DEFAULT_SOCKET_SERVER_PORT') }}";
 
     @if (\Illuminate\Support\Facades\Session::has('redirect'))
     toastr.success("{{\Illuminate\Support\Facades\Session::get('redirect')}}", "Success", {timeOut: 5000})
@@ -81,5 +82,3 @@
 </script>
 
 <script type="module" src="{{ asset('static/js/app/app.js') }}"></script>
-
-

@@ -2411,4 +2411,18 @@ $("body").on('click', ".pagination a", function(event) {
 
         return false;
     }
+
+
+});
+
+$("body").on("mouseover", ".notifications",function(event){
+console.log("Reading Notifications");
+let thiss = $(this);
+$.post(API_READ_ALL_NOTIFICATION, function(response){
+
+  Logger.info("All notifications are now read",response);
+  $(thiss).find(".notification-dot").fadeOut(100);
+
+});
+
 });

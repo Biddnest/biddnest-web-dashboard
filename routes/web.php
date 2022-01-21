@@ -259,6 +259,8 @@ Route::prefix('web/api')->group(function () {
         Route::put('/vehicle',[VendorRouter::class,'updateVehicle'])->name("api.vehicle.update");
         Route::delete('/vehicle/{id}',[VendorRouter::class,'deleteVehicle'])->name("api.vehicle.delete");
 
+        Route::post('/notification/read-all',[VendorRouter::class,'readAllNotification'])->name("api.notification.read.all");
+
 
 
     });

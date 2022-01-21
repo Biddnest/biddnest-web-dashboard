@@ -423,4 +423,10 @@ class VendorRouteController extends Controller
         return BookingsController::endTrip($request->public_booking_id, Session::get('organization_id'), $request->pin);
     }
 
+    public function readAllNotification(Request $request){
+
+      return NotificationController::vendorReadNotification(Session::get('account')['id']);
+
+    }
+
 }

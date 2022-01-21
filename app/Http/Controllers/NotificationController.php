@@ -224,4 +224,23 @@ class NotificationController extends Controller
         ]]);
     }
 
+    public static function vendorReadNotification($vendor_id, $notification_id = null){
+
+      $update = Notification::where("vendor_id", $vendor_id);
+
+      if($notification_id)
+        $update->where("id", $notification_id);
+
+      $update->update([
+        "is_read" => CommonEnums::$YES
+      ]);
+
+      if($update)
+        return Helper::response(true, "Notifications marked unread");
+      else
+        return Helper::response(false, "Something went wrong");
+
+
+    }
+
 }

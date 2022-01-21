@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterBookingsTableAddFinalMovingDate extends Migration
+class AlterNotificationsAddReadColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AlterBookingsTableAddFinalMovingDate extends Migration
      */
     public function up()
     {
-        Schema::table('bookings', function (Blueprint $table) {
-            // $table->date("final_moving_date")->nullable();
+        Schema::table('notifications', function (Blueprint $table) {
+            $table->tinyInteger("is_read")->default(0);
         });
     }
 
@@ -25,7 +25,7 @@ class AlterBookingsTableAddFinalMovingDate extends Migration
      */
     public function down()
     {
-        Schema::table('bookings', function (Blueprint $table) {
+        Schema::table('notifications', function (Blueprint $table) {
             //
         });
     }

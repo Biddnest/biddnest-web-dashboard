@@ -1,59 +1,60 @@
-var totaltime = 300;
-var finalTime = 0;
+if ($('#left_timer').length > 0) {
+    var totaltime = 30;
+    var finalTime = 0;
 
 
-function update(percent){
-  var deg;
-  if(percent<(totaltime/2)){
-    deg = 90 + (360*percent/totaltime);
-      $('.pie').css('background-image',
-                'linear-gradient('+deg+'deg, transparent 50%, white 50%),linear-gradient(90deg, white 50%, transparent 50%)'
-               );
-  } else if(percent>=(totaltime/2)){
-          deg = -90 + (360*percent/totaltime);
-          $('.pie').css('background-image',
-                'linear-gradient('+deg+'deg, transparent 50%,  #2699FB 50%),linear-gradient(90deg, white 50%, transparent 50%)'
-               );
-          }
-}
-var count = parseInt($('#time').data('count'));
-myCounter = setInterval(function () {
-  count -=1;
-  $('#time').data('count');
-    update(count);
+    function update(percent) {
+        var deg;
+        if (percent < (totaltime / 2)) {
+            deg = 90 + (360 * percent / totaltime);
+            $('.pie').css('background-image',
+                'linear-gradient(' + deg + 'deg, transparent 50%, white 50%),linear-gradient(90deg, white 50%, transparent 50%)'
+            );
+        } else if (percent >= (totaltime / 2)) {
+            deg = -90 + (360 * percent / totaltime);
+            $('.pie').css('background-image',
+                'linear-gradient(' + deg + 'deg, transparent 50%,  #2699FB 50%),linear-gradient(90deg, white 50%, transparent 50%)'
+            );
+        }
+    }
+    var count = parseInt($('#time').text());
+    myCounter = setInterval(function() {
+        count -= 1;
+        $('#time').html(count);
+        update(count);
 
-  if(count==finalTime) clearInterval(myCounter);
-}, 1000);
-
-
-//
+        if (count == finalTime) clearInterval(myCounter);
+    }, 1000);
 
 
-const FULL_DASH_ARRAY = 283;
-const WARNING_THRESHOLD = 10;
-const ALERT_THRESHOLD = 5;
+    // 
 
-const COLOR_CODES = {
-  info: {
-    color: "green"
-  },
-  warning: {
-    color: "orange",
-    threshold: WARNING_THRESHOLD
-  },
-  alert: {
-    color: "red",
-    threshold: ALERT_THRESHOLD
-  }
-};
 
-const TIME_LIMIT = 20;
-let timePassed = 0;
-let timeLeft = TIME_LIMIT;
-let timerInterval = null;
-let remainingPathColor = COLOR_CODES.info.color;
+    const FULL_DASH_ARRAY = 283;
+    const WARNING_THRESHOLD = 10;
+    const ALERT_THRESHOLD = 5;
 
-document.getElementById("app").innerHTML = `
+    const COLOR_CODES = {
+        info: {
+            color: "green"
+        },
+        warning: {
+            color: "orange",
+            threshold: WARNING_THRESHOLD
+        },
+        alert: {
+            color: "red",
+            threshold: ALERT_THRESHOLD
+        }
+    };
+
+    const TIME_LIMIT = $("#left_timer").data('time');
+    let timePassed = 0;
+    let timeLeft = TIME_LIMIT;
+    let timerInterval = null;
+    let remainingPathColor = COLOR_CODES.info.color;
+
+    document.getElementById("left_timer").innerHTML = `
 <div class="base-timer">
   <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
     <g class="base-timer__circle">
@@ -77,68 +78,70 @@ document.getElementById("app").innerHTML = `
 </div>
 `;
 
-startTimer();
+    startTimer();
+    console.log(timeLeft);
 
-function onTimesUp() {
-  clearInterval(timerInterval);
-}
-
-function startTimer() {
-  timerInterval = setInterval(() => {
-    timePassed = timePassed += 1;
-    timeLeft = TIME_LIMIT - timePassed;
-    document.getElementById("base-timer-label").innerHTML = formatTime(
-      timeLeft
-    );
-    setCircleDasharray();
-    setRemainingPathColor(timeLeft);
-
-    if (timeLeft === 0) {
-      onTimesUp();
+    function onTimesUp() {
+        clearInterval(timerInterval);
     }
-  }, 1000);
-}
 
-function formatTime(time) {
-  const minutes = Math.floor(time / 60);
-  let seconds = time % 60;
+    function startTimer() {
+        timerInterval = setInterval(() => {
+            timePassed = timePassed += 1;
+            timeLeft = TIME_LIMIT - timePassed;
+            document.getElementById("base-timer-label").innerHTML = formatTime(
+                timeLeft
+            );
+            setCircleDasharray();
+            setRemainingPathColor(timeLeft);
 
-  if (seconds < 10) {
-    seconds = `0${seconds}`;
-  }
+            if (timeLeft === 0) {
+                onTimesUp();
+            }
+        }, 1000);
+    }
 
-  return `${minutes}:${seconds}`;
-}
+    function formatTime(time) {
+        const minutes = Math.floor(time / 60);
+        let seconds = time % 60;
 
-function setRemainingPathColor(timeLeft) {
-  const { alert, warning, info } = COLOR_CODES;
-  if (timeLeft <= alert.threshold) {
-    document
-      .getElementById("base-timer-path-remaining")
-      .classList.remove(warning.color);
-    document
-      .getElementById("base-timer-path-remaining")
-      .classList.add(alert.color);
-  } else if (timeLeft <= warning.threshold) {
-    document
-      .getElementById("base-timer-path-remaining")
-      .classList.remove(info.color);
-    document
-      .getElementById("base-timer-path-remaining")
-      .classList.add(warning.color);
-  }
-}
+        if (seconds < 10) {
+            seconds = `0${seconds}`;
+        }
 
-function calculateTimeFraction() {
-  const rawTimeFraction = timeLeft / TIME_LIMIT;
-  return rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction);
-}
+        return `${minutes}:${seconds}`;
+    }
 
-function setCircleDasharray() {
-  const circleDasharray = `${(
+    function setRemainingPathColor(timeLeft) {
+        const { alert, warning, info } = COLOR_CODES;
+        if (timeLeft <= alert.threshold) {
+            document
+                .getElementById("base-timer-path-remaining")
+                .classList.remove(warning.color);
+            document
+                .getElementById("base-timer-path-remaining")
+                .classList.add(alert.color);
+        } else if (timeLeft <= warning.threshold) {
+            document
+                .getElementById("base-timer-path-remaining")
+                .classList.remove(info.color);
+            document
+                .getElementById("base-timer-path-remaining")
+                .classList.add(warning.color);
+        }
+    }
+
+    function calculateTimeFraction() {
+        const rawTimeFraction = timeLeft / TIME_LIMIT;
+        return rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction);
+    }
+
+    function setCircleDasharray() {
+        const circleDasharray = `${(
     calculateTimeFraction() * FULL_DASH_ARRAY
   ).toFixed(0)} 283`;
-  document
-    .getElementById("base-timer-path-remaining")
-    .setAttribute("stroke-dasharray", circleDasharray);
+        document
+            .getElementById("base-timer-path-remaining")
+            .setAttribute("stroke-dasharray", circleDasharray);
+    }
 }

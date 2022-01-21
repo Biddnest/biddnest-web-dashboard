@@ -39,9 +39,9 @@
                                 </p>
                                 <h3 class="f-18 pb-4 bold mt-2 time">Time Left</h3>
 
-                                <span class="text-center timer" data-time="{{$booking->bid_result_at}}" style="font-size: 20px !important;"></span>
+                                <!-- <span class="text-center timer" data-time="{{$booking->bid_result_at}}" style="font-size: 20px !important;"></span> -->
 
-{{--                                <div id="app" style="margin-bottom: 60px;"></div>--}}
+                                <div id="left_timer" data-time="{{\Carbon\Carbon::now()->diffInSeconds($booking->bid_result_at)}}" style="margin-bottom: 60px;"></div>
                             </div>
                         @elseif(($booking->status == \App\Enums\BookingEnums::$STATUS['payment_pending']))
                             <div id="proceed" {{--style="display: none"--}}>

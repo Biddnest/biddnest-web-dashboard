@@ -101,7 +101,7 @@ crossorigin="anonymous"></script>
 
     // Inititalizing socket
     // const socket = io(SOCKET_SERVER_URL);
-    const socket = io("127.0.0.1:{{env('DEFAULT_SOCKET_SERVER_PORT')}}");
+    const socket = io(SOCKET_SERVER_URL);
 
     socket.on("connect",()=>{
       console.log("connected to socket");

@@ -123,8 +123,9 @@
                                             <div class="text-center ">
                                                 <p class="text-muted f-14 pt-4 italic notification-message"> You will get the estimated price once the time is up</p>
                                                 <h3 class="f-18 pb-4 theme-text bold ">Time Left</h3>
-                                                {{--<div id="app"></div>--}}
-                                                <span class="text-center timer" data-time="{{$booking->bid_result_at}}" style="font-size: 20px !important;"></span>
+                                                <div id="left_timer" data-time="{{\Carbon\Carbon::now()->diffInSeconds($booking->bid_result_at)}}" style="margin-bottom: 60px;"></div>
+                            
+                                                <!-- <span class="text-center timer" data-time="{{$booking->bid_result_at}}" style="font-size: 20px !important;"></span> -->
                                             </div>
                                         </div>
                                         <div class="button-bottom d-flex justify-content-center pt-4">

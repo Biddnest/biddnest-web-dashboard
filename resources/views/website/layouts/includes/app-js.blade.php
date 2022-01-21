@@ -41,7 +41,7 @@
 <script src="{{ asset('static/website/js/intlTelInput.js')}}"></script>
 
 <script src="{{ asset('static/website/js/locationpicker.jquery.js')}}"></script>
-{{--<script src="{{ asset('static/website/js/timer.js')}}"></script>--}}
+<script src="{{ asset('static/website/js/timer.js')}}"></script>
 <script src="{{ asset('static/website/js/maps.js')}}"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 

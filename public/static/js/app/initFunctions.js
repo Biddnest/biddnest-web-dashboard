@@ -1352,15 +1352,16 @@ export function initSocket(){
   if ($(".main-content").data("barba-namespace") == "vendor-orderdetail") {
     console.log("Initing socket");
 
-      socket.emit("booking.listen.start", {
-        data:{
-          public_booking_id : $("#current-booking-id").val(),
-          organization_id : $("#current-org-id").val(),
-          watcher_id : $("#current-watcher-id").val(),
-        },
-        bypass_auth: true
-      });
+        socket.emit("booking.listen.start", {
+          data:{
+            public_booking_id : $("#current-booking-id").val(),
+            organization_id : $("#current-org-id").val(),
+            watcher_id : $("#current-watcher-id").val(),
+          },
+          bypass_auth: true
+        });
 
+    if($("#is_watched").length && $("#is_watched").val() == "false")
       socket.emit("booking.watch.start", {
         data:{
           public_booking_id : $("#current-booking-id").val(),
@@ -1372,9 +1373,11 @@ export function initSocket(){
 
       socket.on("booking.rejected", (data)=>{
         console.log("Listened booking rejected");
-        // $(".bidding-actions").addClass("hidden");
-        // if(confirm("Somebody from your organization has rejected this booking. You will be taken to live orders."))
-          // location.assign('{{route('vendor.bookings', ['type'=>"live"])}}');
+        $(".bidding-actions").addClass("hidden");
+        $("#is-watched-label").html("This booking has been rejected by a person from your organization. You won't be able to do any further actions.");
+        $("#is-watched-label").removeClass("hidden");
+          // if(confirm("A user from your organization has rejected this booking. You are been taken to live orders."))
+          //   location.assign(ROUTE_LIVE_ORDERS);
       });
 
   }

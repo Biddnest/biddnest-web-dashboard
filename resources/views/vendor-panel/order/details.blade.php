@@ -6,6 +6,7 @@
       <input type="hidden" id="current-booking-id" value="{{request()->id}}" />
       <input type="hidden" id="current-org-id" value="{{ session('organization_id') }}" />
       <input type="hidden" id="current-watcher-id" value="{{ session('account')['id'] }}" />
+      <input type="hidden" id="is_watched" value="{{ $bidding->watcher_id ? 'true' : 'false' }}" />
         <div class="d-flex  flex-row justify-content-between vertical-center">
             <h3 class="page-head text-left p-4 f-20 theme-text">Order Details</h3>
             <div class="mr-20">
@@ -49,8 +50,13 @@
                                     @endforeach
                                 </div>
                             </div>
+
                             @if($booking->bid->status == \App\Enums\BidEnums::$STATUS['bid_submitted'] || $booking->bid->status == \App\Enums\BidEnums::$STATUS['active'])
-                                <div class="d-felx justify-content-center pt-4 border-top row">
+                            <div class="alert alert-warning @if($bidding->watcher_id && $bidding->watcher_id != session('account')['id']) visible @else hidden @endif" role="alert" style="padding-bottom: 15px !important" id="is-watched-label">
+                                This booking is been watched another person from your organization. You will be able to bid once they leave this booking.
+                            </div>
+
+                                <div class="d-flex justify-content-center pt-4 border-top row">
                                     <div class="bid-badge mr-4">
                                         <h4 class="step-title" style="padding: 12px 34px;">₹ {{$booking->organization_rec_quote}}</h4>
                                         <p>Estimated Price</p>

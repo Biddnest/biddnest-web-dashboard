@@ -19,10 +19,7 @@
                     <li class="breadcrumb-item active" aria-current="page"><a href="#">Search Result</a></li>
                 </ol>
             </nav>
-
-
         </div>
-
     </div>
 
 
@@ -45,8 +42,8 @@
                     </h3>
 
                         <div class="header-wrap p-0 filter-dropdown ">
-                            
-                            
+
+
                         </div>
 
 
@@ -121,7 +118,7 @@
                                                     </i>
                                                 </a>
                                             @break
-                                            
+
                                             @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
                                             <a href="{{route('vendor.driver-details',['id'=>$booking->public_booking_id])}}">
                                                     <i class="tooltip-trigger">

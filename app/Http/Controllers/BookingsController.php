@@ -1025,7 +1025,7 @@ class BookingsController extends Controller
         return true;
     }
 
-    /*apis for websocket running in websocket.js*/
+    /* apis for websocket running in websocket.js */
     public static function startVendorWatch($request)
     {
 

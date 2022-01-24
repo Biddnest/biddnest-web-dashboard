@@ -93,7 +93,7 @@ crossorigin="anonymous"></script>
     const API_SEARCH_ADMIN = '{{route('search_admin')}}';
     const API_READ_ALL_NOTIFICATION = '{{route('api.notification.read.all')}}';
     const SOCKET_SERVER_URL = '{{ (env('SECURE_SOCKET') ? "https://" : "http://") . env("APP_IP").":".env('DEFAULT_SOCKET_SERVER_PORT') }}';
-
+    const ROUTE_LIVE_ORDERS = '{{route('vendor.bookings', ['type'=>"live"])}}';
 
     @if (\Illuminate\Support\Facades\Session::has('redirect'))
     toastr.success("{{\Illuminate\Support\Facades\Session::get('redirect')}}", "Success", {timeOut: 5000})
@@ -108,12 +108,19 @@ crossorigin="anonymous"></script>
     });
 
     socket.on("info.debug", (data)=>{
-      console.log("Debug data from server, data");
+      console.log("Debug data from server", data);
     });
 
-    socket.on("booking.watch.end", (data)=>{
+    socket.on("booking.watch.stop", (data)=>{
       console.log("Listened watch end");
-      // $(".bidding-actions").removeClass("hidden");
+      $(".bidding-actions").removeClass("hidden");
+      $("#is-watched-label").addClass("hidden");
+    });
+
+    socket.on("booking.watch.start", (data)=>{
+      console.log("Listened watch end");
+      $(".bidding-actions").addClass("hidden");
+      $("#is-watched-label").removeClass("hidden");
     });
 
 </script>

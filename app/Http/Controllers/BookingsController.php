@@ -1041,7 +1041,7 @@ class BookingsController extends Controller
         Bid::where("booking_id", Booking::where('public_booking_id', $request['data']['public_booking_id'])->pluck('id')[0])
             ->where("organization_id", isset($request['bypass_auth']) ? $request['data']['organization_id'] : $token->payload->organization_id)
             ->update([
-                "watcher_id" => $request['bypass_auth'] ? $request['data']['watcher_id'] : $token->payload->id
+                "watcher_id" => isset($request['bypass_auth']) ? $request['data']['watcher_id'] : $token->payload->id
             ]);
 
         return Helper::response(true, "Watching Started", ["booking" => Booking::where('public_booking_id', $request['data']['public_booking_id'])->with(["bid" => function ($query) use ($token, $request) {
@@ -1062,7 +1062,7 @@ class BookingsController extends Controller
         }
 
         Bid::where("booking_id", Booking::where('public_booking_id', $request['data']['public_booking_id'])->pluck('id')[0])
-            ->where("watcher_id", $request['bypass_auth'] ? $request['data']['watcher_id'] : $token->payload->id)
+            ->where("watcher_id", isset($request['bypass_auth']) ? $request['data']['watcher_id'] : $token->payload->id)
             ->where("organization_id", isset($request['bypass_auth']) ? $request['data']['organization_id'] : $token->payload->organization_id)
             ->update([
                 "watcher_id" => null

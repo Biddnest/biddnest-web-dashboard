@@ -1031,7 +1031,7 @@ class BookingsController extends Controller
 
 
       $token = null;
-      if(!$request['bypass_auth']){
+      if(!isset($request['bypass_auth'])) {
         $token = (object)Helper::validateAuthToken($request['token']);
         $vendor = Vendor::find($token->payload->id);
         if (!$token || !$vendor)
@@ -1054,7 +1054,7 @@ class BookingsController extends Controller
     public static function stopVendorWatch($request)
     {
       $token = null;
-      if(!$request['bypass_auth']){
+      if(!isset($request['bypass_auth'])){
         $token = (object)Helper::validateAuthToken($request['token']);
         $vendor = Vendor::find($token->payload->id);
         if (!$token || !$vendor)

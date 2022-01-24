@@ -1350,19 +1350,34 @@ export function initInventoryDropzone() {
 
 export function initSocket(){
   if ($(".main-content").data("barba-namespace") == "vendor-orderdetail") {
+
+    socket.emit("booking.listen.start", {
+      data:{
+        public_booking_id : $("#current-booking-id").val(),
+        organization_id : $("#current-org-id").val(),
+        watcher_id : $("#current-watcher-id").val(),
+      },
+      bypass_auth: true
+    });
+
+if($("#is_watched").length && $("#is_watched").val() == "false")
+  socket.emit("booking.watch.start", {
+    data:{
+      public_booking_id : $("#current-booking-id").val(),
+      organization_id : $("#current-org-id").val(),
+      watcher_id : $("#current-watcher-id").val(),
+    },
+    bypass_auth: true
+  });
+
     console.log("Initing socket");
 
-        socket.emit("booking.listen.start", {
-          data:{
-            public_booking_id : $("#current-booking-id").val(),
-            organization_id : $("#current-org-id").val(),
-            watcher_id : $("#current-watcher-id").val(),
-          },
-          bypass_auth: true
-        });
+    socket.on("booking.watch.stop", (data)=>{
+      console.log("Listened watch end");
+      $(".bidding-actions").removeClass("hidden");
+      $("#is-watched-label").addClass("hidden");
 
-    if($("#is_watched").length && $("#is_watched").val() == "false")
-      socket.emit("booking.watch.start", {
+      socket.emit("booking.listen.start", {
         data:{
           public_booking_id : $("#current-booking-id").val(),
           organization_id : $("#current-org-id").val(),
@@ -1370,6 +1385,16 @@ export function initSocket(){
         },
         bypass_auth: true
       });
+
+    });
+
+    socket.on("booking.watch.start", (data)=>{
+      console.log("Listened watch end");
+      $(".bidding-actions").addClass("hidden");
+      $("#is-watched-label").removeClass("hidden");
+    });
+
+
 
       socket.on("booking.rejected", (data)=>{
         console.log("Listened booking rejected");

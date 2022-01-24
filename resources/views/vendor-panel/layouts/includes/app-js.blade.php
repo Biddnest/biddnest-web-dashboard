@@ -111,17 +111,7 @@ crossorigin="anonymous"></script>
       console.log("Debug data from server", data);
     });
 
-    socket.on("booking.watch.stop", (data)=>{
-      console.log("Listened watch end");
-      $(".bidding-actions").removeClass("hidden");
-      $("#is-watched-label").addClass("hidden");
-    });
-
-    socket.on("booking.watch.start", (data)=>{
-      console.log("Listened watch end");
-      $(".bidding-actions").addClass("hidden");
-      $("#is-watched-label").removeClass("hidden");
-    });
+    
 
 </script>
 

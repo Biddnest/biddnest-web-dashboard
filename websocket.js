@@ -1,6 +1,19 @@
 const app = require('express')();
-const server = require('http').Server(app);
+// const server = require('https').Server(app);
+const http = require('https');
 const cors = require('cors')
+const fs = require("fs");
+
+const options = {
+	key: fs.readFileSync("certs/uat-private-key.pem", "ascii"),
+	cert: fs.readFileSync("certs/uat-certificate.pem", "ascii"),
+	ca: fs.readFileSync("certs/lets-encrypt-ca.cert", "ascii"),
+};
+
+var server = http.createServer(options, app);
+// var server = http.createServer(app);
+
+
 const io = require('socket.io')(server, {
     cors: {
         origin: "*",
@@ -157,4 +170,6 @@ io.on("connection", (socket) => {
     });
 });
 
-server.listen(process.env.DEFAULT_SOCKET_SERVER_PORT);
+server.listen(process.env.DEFAULT_SOCKET_SERVER_PORT, "0.0.0.0", ()=>{
+  console.log("Websocket server has started. Listening to clients");
+});

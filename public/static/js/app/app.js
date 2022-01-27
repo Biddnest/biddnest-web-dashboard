@@ -247,7 +247,7 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
                 if("type" in response.data && response.data.type == "prompt"){
                     let input = prompt(response.data.prompt_label);
                     if(input)
-                        form.prepend(`<input type="hidden" name="${respone.data.key}" value="${input}" required />`);
+                        form.prepend(`<input type="hidden" name="${response.data.key}" value="${input}" required />`);
                     form.submit();
                 }
                 else{

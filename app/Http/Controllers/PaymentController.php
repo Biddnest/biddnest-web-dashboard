@@ -9,7 +9,9 @@ use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
 use App\Enums\NotificationEnums;
 use App\Enums\PaymentEnums;
+use App\Enums\VendorEnums;
 use App\Helper;
+use App\Sms;
 use App\Models\Bid;
 use App\Models\Booking;
 use App\Models\BookingStatus;
@@ -23,6 +25,7 @@ use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Models\User;
+use App\Models\Vendor;
 use App\Models\Organization;
 
 class PaymentController extends Controller
@@ -304,12 +307,43 @@ class PaymentController extends Controller
         return Helper::response(true, "Payment successful");
     }
 
-    public static function updateBookingPaymentData($booking_id, $bid_amount, $subtotal, $commission, $other_charges, $tax, $discount, $grand_total = 0.00, $amount_confirm=false){
+    public static function updateBookingPaymentData($booking_id, $bid_amount, $subtotal, $commission, $other_charges, $tax, $discount, $grand_total = 0.00, $amount_confirm=false, $otp = null){
         Log::info($commission);
         $booking_exist = Booking::where("id", $booking_id)->first();
 
         if(!$booking_exist)
             return Helper::response(false, "Booking is not exist");
+
+        if(!$otp) {
+
+            $otp = Helper::generateOTP(6);
+
+            Vendor::where("organization_id", Booking::where("id", $booking_id)->pluck('organization_id')[0])->where('user_role',VendorEnums::$ROLES['admin'])
+                ->update([
+                    "verf_otp"=>$otp
+                ]);
+
+
+            $phone = Vendor::where("organization_id", Booking::where("id", $booking_id)->pluck('organization_id')[0])
+                ->where('user_role',VendorEnums::$ROLES['admin'])
+                ->pluck("phone")[0];
+            dispatch(function() use($phone, $otp){
+                Sms::sendOtp($phone, $otp);
+            })->afterResponse();
+
+            return Helper::response("await", "Otp has been sent to the vendor.", ["type"=>"prompt", "key" => "otp", "prompt_label"=>"Confirm otp sent to vendor on {$phone}"]);
+        }
+
+        $verf_otp = Vendor::where("organization_id", Booking::where("id", $booking_id)->pluck('organization_id')[0])
+            ->where('user_role',VendorEnums::$ROLES['admin'])
+            ->pluck("verf_otp")[0];
+        if($otp != $verf_otp)
+            return Helper::response(false, "OTP provided is incorrect.");
+        else
+            Vendor::where("organization_id", Booking::where("id", $booking_id)->pluck('organization_id')[0])->where('user_role',VendorEnums::$ROLES['admin'])
+                ->update([
+                    "verf_otp"=>null
+                ]);
 
         Payment::where("booking_id", $booking_id)->update([
             "vendor_quote"=>round((float)$bid_amount, 2),

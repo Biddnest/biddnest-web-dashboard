@@ -161,7 +161,14 @@ class BidController extends Controller
                     ]);
                 $result_status = BookingsController::statusChange($book_id, BookingEnums::$STATUS['biding']);
             }
-            if($low_quoted_vendors > 1){
+            /*if($low_quoted_vendors > 1){
+
+            }*/
+
+            $vendor_id =  Bid::where("booking_id", $book_id)->where("status", BidEnums::$STATUS['bid_submitted'])->whereNotNull('vendor_id')->pluck('id');
+
+            if($low_quoted_vendors > 1) {
+
                 $addrebidtime = Booking::where(["user_id" => $order->user_id,
                     "public_booking_id" => $order->public_booking_id])
                     ->update([
@@ -170,19 +177,15 @@ class BidController extends Controller
                         "bid_result_at" => $complete_time,
                         "bid_end_at" =>  $bid_end_time
                     ]);
-                $result_status = BookingsController::statusChange($book_id, BookingEnums::$STATUS['rebiding']); 
-            }
+                $result_status = BookingsController::statusChange($book_id, BookingEnums::$STATUS['rebiding']);
 
-            $vendor_id =  Bid::where("booking_id", $book_id)->where("status", BidEnums::$STATUS['bid_submitted'])->whereNotNull('vendor_id')->pluck('id');
-
-            if($low_quoted_vendors > 1) {
                 Bid::where("booking_id", $book_id)->whereIn("id", $vendor_id)
                     ->update([
                         "bid_type" => BidEnums::$BID_TYPE['rebid'],
                         "status" => BidEnums::$STATUS['active']
                     ]);
 
-                NotificationController::sendTo("vendor", $vendor_id, "You need to re-bid on this booking.", "Tap to view.", [
+                NotificationController::sendTo("vendor", $vendor_id,"Rebid required", "You need to re-bid on this booking.", [
                     "type" => NotificationEnums::$TYPE['booking'],
                     "public_booking_id" => Booking::where("id", $book_id)->pluck('public_booking_id')[0]
                 ]);

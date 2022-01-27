@@ -62,7 +62,7 @@ if (env != "development")
     Logger.setLevel(Logger.OFF);
 
 
-    
+
 
 // getLocationPermission();
 
@@ -244,8 +244,16 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
 
                 revertFormAnim(button, buttonPretext);
             } else if (response.status == "await") {
-                $(form.data('await-input')).toggleClass('hidden');
-                revertFormAnim(button, buttonPretext);
+                if("type" in response.data && response.data.type == "prompt"){
+                    let input = prompt(response.data.prompt_label);
+                    if(input)
+                        form.prepend(`<input type="hidden" name="${respone.data.key}" value="${input}" required />`);
+                    form.submit();
+                }
+                else{
+                    $(form.data('await-input')).toggleClass('hidden');
+                    revertFormAnim(button, buttonPretext);
+                }
 
                 /*remove in prod*/
                 if ("otp" in response.data && env == "development")

@@ -1484,13 +1484,14 @@ class Route extends Controller
              'other_charges' => 'nullable|numeric',
              'discount_amount' => 'required|numeric',
              'tax' => 'required|numeric',
-             'grand_total' => 'required|numeric'
+             'grand_total' => 'required|numeric',
+             'otp'=>"string|nullable"
          ]);
 
          if($validation->fails())
              return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-         return PaymentController::updateBookingPaymentData($request->booking_id, $request->bid_amount, $request->sub_total, $request->commission, $request->other_charges, $request->tax, $request->discount_amount, $request->grand_total, $request->confirm);
+         return PaymentController::updateBookingPaymentData($request->booking_id, $request->bid_amount, $request->sub_total, $request->commission, $request->other_charges, $request->tax, $request->discount_amount, $request->grand_total, $request->confirm, $request->otp);
      }
 
      public function bookinStatusChange(Request $request){

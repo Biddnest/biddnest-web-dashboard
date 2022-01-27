@@ -246,8 +246,10 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
             } else if (response.status == "await") {
                 if("type" in response.data && response.data.type == "prompt"){
                     let input = prompt(response.data.prompt_label);
-                    if(input)
+                    if(input) {
+                        form.find(`[name="${response.data.key}"]`).remove();
                         form.prepend(`<input type="hidden" name="${response.data.key}" value="${input}" required />`);
+                    }
                     form.submit();
                 }
                 else{

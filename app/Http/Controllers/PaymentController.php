@@ -319,6 +319,7 @@ class PaymentController extends Controller
             $otp = Helper::generateOTP(6);
 
             Vendor::where("organization_id", Booking::where("id", $booking_id)->pluck('organization_id')[0])->where('user_role',VendorEnums::$ROLES['admin'])
+                ->first()
                 ->update([
                     "verf_code"=>$otp
                 ]);
@@ -336,9 +337,11 @@ class PaymentController extends Controller
 
         $verf_otp = Vendor::where("organization_id", Booking::where("id", $booking_id)->pluck('organization_id')[0])
             ->where('user_role',VendorEnums::$ROLES['admin'])
+            ->first()
             ->pluck("verf_code")[0];
+
         if($otp != $verf_otp)
-            return Helper::response(false, "OTP provided is incorrect.");
+            return Helper::response(false, "OTP provided is incorrect.", [$verf_otp]);
         else
             Vendor::where("organization_id", Booking::where("id", $booking_id)->pluck('organization_id')[0])->where('user_role',VendorEnums::$ROLES['admin'])
                 ->update([

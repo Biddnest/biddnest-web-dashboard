@@ -314,18 +314,18 @@ class PaymentController extends Controller
         if(!$booking_exist)
             return Helper::response(false, "Booking is not exist");
 
+        $admin_user = Vendor::where("organization_id", Booking::where("id", $booking_id)->pluck('organization_id')[0])->where('user_role',VendorEnums::$ROLES['admin'])
+            ->first();
+
         if(!$otp) {
             $new_otp = Helper::generateOTP(6);
-            Vendor::where("organization_id", Booking::where("id", $booking_id)->pluck('organization_id')[0])->where('user_role',VendorEnums::$ROLES['admin'])
-                ->first()
+
+            Vendor::where("id", $admin_user->id)
                 ->update([
                     "verf_code"=>$new_otp
                 ]);
 
-            $phone = Vendor::where("organization_id", Booking::where("id", $booking_id)->pluck('organization_id')[0])
-                ->where('user_role',VendorEnums::$ROLES['admin'])
-                ->first()
-                ->pluck("phone")[0];
+            $phone = $admin_user->phone;
             dispatch(function() use($phone, $new_otp){
                 Sms::sendOtp($phone, $new_otp);
             })->afterResponse();
@@ -333,12 +333,7 @@ class PaymentController extends Controller
             return Helper::response("await", "Otp has been sent to the vendor.", ["type"=>"prompt", "key" => "otp", "prompt_label"=>"Confirm otp sent to vendor on {$phone}"]);
         }
 
-        $verf_otp = Vendor::where("organization_id", Booking::where("id", $booking_id)->pluck('organization_id')[0])
-            ->where('user_role',VendorEnums::$ROLES['admin'])
-            ->first()
-            ->pluck("verf_code")[0];
-
-        if($otp != $verf_otp)
+        if($otp != $admin_user->verf_code)
             return Helper::response(false, "OTP provided is incorrect.", [$verf_otp]);
         else
             Vendor::where("organization_id", Booking::where("id", $booking_id)->pluck('organization_id')[0])->where('user_role',VendorEnums::$ROLES['admin'])

@@ -334,7 +334,7 @@ class PaymentController extends Controller
         }
 
         if($otp != $admin_user->verf_code)
-            return Helper::response(false, "OTP provided is incorrect.", [$verf_otp]);
+            return Helper::response(false, "OTP provided is incorrect.", [$admin_user]);
         else
             Vendor::where("organization_id", Booking::where("id", $booking_id)->pluck('organization_id')[0])->where('user_role',VendorEnums::$ROLES['admin'])
                 ->update([

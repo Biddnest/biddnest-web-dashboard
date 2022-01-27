@@ -334,7 +334,7 @@ class PaymentController extends Controller
         }
 
         if($otp != $admin_user->verf_code)
-            return Helper::response("await", "OTP provided is incorrect.", ["type"=>"prompt", "key" => "otp", "prompt_label"=>"Entered OTP is incorrect. Re-enter otp sent to vendor on {$phone}"]);
+            return Helper::response("await", "OTP provided is incorrect.", ["type"=>"prompt", "key" => "otp", "prompt_label"=>"Entered OTP is incorrect. Re-enter otp sent to vendor on {$admin_user->phone}"]);
         else
             Vendor::where("id", $admin_user->id)->update([
                     "verf_code"=>null

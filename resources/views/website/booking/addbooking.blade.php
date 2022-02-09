@@ -27,7 +27,7 @@
                             <div class="col-md-8 setup-panel-3">
                                 <div class="steps-step-2 ">
                                     <p class="step-text text-right ">Delivery Details<span class="text-muted ">
-                                            Personal Info</span>
+                                            Provide Locations</span>
                                 </div>
                             </div>
                             <div class="col-md-4 steps-row-3 setup-panel-3">
@@ -40,8 +40,7 @@
                         <div class="row steps-form-3 ">
                             <div class="col-md-8 setup-panel-3">
                                 <div class="steps-step-3 ">
-                                    <p class="step-text text-right ">Requirements<span class="text-muted "> Personal
-                                            Info</span></p>
+                                    <p class="step-text text-right ">Requirements<span class="text-muted "> Add Items</span></p>
                                 </div>
                             </div>
                             <div class="col-md-4 steps-row-3 setup-panel-3">
@@ -55,7 +54,7 @@
                             <div class="col-md-8 setup-panel-3">
                                 <div class="steps-step-4 ">
                                     <p class="step-text text-right">Instructions<span class="text-muted ">
-                                            Personal Info</span>
+                                            Additional Instructions</span>
                                     </p>
                                 </div>
                             </div>
@@ -70,7 +69,7 @@
                             <div class="col-md-8 setup-panel-3">
                                 <div class="steps-step-5 ">
                                     <p class="step-text text-right ">Estimation Cost<span class="text-muted ">
-                                            Personal Info</span>
+                                            Confirm Booking</span>
                                 </div>
                             </div>
                             <div class="col-md-4 steps-row-3 setup-panel-3">
@@ -84,8 +83,7 @@
                             <div class="col-md-8 setup-panel-3">
                                 <div class="steps-step-6 ">
                                     <p class="step-text text-right ">Place Request<span class="text-muted ">
-                                            Personal
-                                            Info</span></p>
+                                            Bidding</span></p>
                                 </div>
                             </div>
                             <div class="col-md-4 steps-row-3 setup-panel-3">

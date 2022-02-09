@@ -415,7 +415,7 @@
 
                                 </div>
                                 <input type="hidden" name="meta[subcategory]" id="subservice_id">
-                                <div id="filter" class="bg-light">
+                                <div id="filter" class="bg-light" style="display:none !important;">
                                     <ul class="nav nav-tabs " id="myTab " role="tablist ">
                                         <li class="nav-item ">
                                             <a class="nav-link active p-15 filter-button" id="live-tab " data-toggle="tab " href="#live " role="tab " aria-controls="home " aria-selected="true " data-filter="all">All</a>

@@ -107,6 +107,31 @@ $('.card-methord').click(function() {
     $("body").on("click",".quantity-operator .plus",function(e){
         let quantity = $(this).parent().find('input').val();
         quantity++;
+
+        if($(this).closest(".row").hasClass("inventory")){
+            console.log("Checking quantity count");
+            let extra_item_count = 0;
+            $(this).closest(".row").find(".custom-item").each(function() {
+                console.log($(this).find(".quantity input").val());
+                extra_item_count += parseInt($(this).find(".quantity input").val());
+            });
+            // extra_item_count += parseInt(item.quantity);
+
+            console.log("Total Extra Items:", extra_item_count);
+            console.log("Max Inv count:", $(".max-inv-count").val());
+            if (extra_item_count > $(".max-inv-count").val()) {
+
+                Swal.fire({
+                    icon: "warning",
+                    title: "Oops",
+                    text: `You can only add upto ${$(".max-inv-count").val()}  extra items.`,
+                    confirmButtonText: "close message"
+                });
+
+                return false;
+            }
+        }
+
         if(quantity > 0)
             $(this).parent().find('input').val(quantity);
     });

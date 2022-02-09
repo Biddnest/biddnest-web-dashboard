@@ -115,7 +115,7 @@
                                                         <div>
                                                             <label class="switch2">
                                                                 <input type="hidden" value="false" name="meta[self_booking]:boolean" id="slef">
-                                                                <input type="checkbox" class="switch" data-value="0" data-target=".toggle-input" name="select_letter" value="0" id="slef1" onchange="document.getElementById('slef').value = this.checked ? false : true" data-phone="{{\Illuminate\Support\Facades\Session::get('account')['phone']}}" data-name="{{\Illuminate\Support\Facades\Session::get('account')['fname']}} {{\Illuminate\Support\Facades\Session::get('account')['lname']}}" data-email="{{\Illuminate\Support\Facades\Session::get('account')['email']}}">
+                                                                <input type="checkbox" class="switch" data-value="0" data-target=".toggle-input" name="select_letter" value="0" id="slef1" onchange="document.getElementById('slef').value = this.checked ? false : true" data-phone="{{\Illuminate\Support\Facades\Session::get('account')['phone']}}" data-name="{{\Illuminate\Support\Facades\Session::get('account')['fname']}}  {{\Illuminate\Support\Facades\Session::get('account')['lname']}}" data-email="{{\Illuminate\Support\Facades\Session::get('account')['email']}}">
                                                                 <span class="slider2"></span>
                                                             </label>
                                                         </div>
@@ -135,7 +135,7 @@
                                                     <div class="form-group">
                                                         <label class="full-name">Full Name</label>
                                                         <span class=" ">
-                                                            <input type="text" id="fullname" placeholder="David Jerome"  class="form-control" name="contact_details[name]" value="{{\Illuminate\Support\Facades\Session::get('account')['fname']}} {{\Illuminate\Support\Facades\Session::get('account')['lname']}}"  class="form-control" required>
+                                                            <input type="text" id="fullname" placeholder="David Jerome"  class="form-control" name="contact_details[name]" value="{{\Illuminate\Support\Facades\Session::get('account')['fname']}}  {{\Illuminate\Support\Facades\Session::get('account')['lname']}}"  class="form-control" required>
                                                             <span class="error-message">Please enter valid
                                                                 name</span>
                                                         </span>

@@ -41,20 +41,20 @@ a.menu:hover{
                             </a>
                         </li>
                         @if(\Illuminate\Support\Facades\Session::get('account'))
-                            <li>
+                            <li class="nav-item theme-text  f-14  m-dropdown cursor-pointer">
                                <a href="{{route('my-bookings')}}">
 {{--                                   <img src="{{ asset('static/website/images/icons/Artboard – 7.svg')}}" />--}}
                                    <i class="fa fa-truck" aria-hidden="true"></i>
                                     <span class="nav-menu-link l-cap pl-1">My Bookings</span></a>
                             </li>
                         @endif
-                        <li>
+                        <li class="nav-item theme-text  f-14  m-dropdown cursor-pointer">
                             <a href="{{route('contact_us')}}">
                                 {{--  <img src="{{ asset('static/website/images/icons/Artboard – 8.svg')}}" class="mb-icon" />--}}
                                 <i class="icon-2  dripicons-headset"></i>
                                 <span class="nav-menu-link l-cap pl-1">Contact Us</span></a>
                         </li>
-                        <li class=" nav-item  dropdown theme-text  f-14  m-dropdown cursor-pointer">
+                        <li class="nav-item  dropdown theme-text  f-14  m-dropdown cursor-pointer">
                             @if(\Illuminate\Support\Facades\Session::get('account'))
                             <a class="nav-link f-14" >
                             <i class="icon-2 dripicons-user"></i>

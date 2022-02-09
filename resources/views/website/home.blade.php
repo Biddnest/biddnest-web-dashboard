@@ -12,7 +12,7 @@
                         <input type="radio" name="service" value="{{$category->id}}" class="card-input-element" data-parsley-errors-container="#service-error" />
                         <div class="card-header card-methord  bg-turnblue  building-type {{--@if($loop->iteration == 1) selected turntheme @endif--}}" style="width: 100%;">
                             <div class="card-body-top">
-                                <img class="icon-cards" src="{{$category->image}}" />
+                                <img class="icon-cards" src="{{$category->image}}?refresh={{uniqid()}}" />
                                 <p class="building-type-text">{{ucwords($category->name)}}</p>
                             </div>
                         </div>

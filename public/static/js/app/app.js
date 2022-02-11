@@ -113,13 +113,17 @@ $("body").on("submit", ".hero-booking-form", function(event) {
 });
 
 /* AJAX Universal */
-$("body").on('submit', "form:not(.no-ajax)", function() {
+$("body").on('submit', "form:not(.no-ajax, .payment-load)", function() {
     let form = $(this);
     let requestData = form.serializeJSON();
     let button = form.find("button[type=submit]");
     Logger.info(button);
     let buttonPretext = button.html();
     Logger.info("Loggin request payload", requestData);
+
+    if ($(".tandc").is(":checked")) {
+
+    }
 
     $.ajax({
         url: form.attr("action"),
@@ -290,9 +294,13 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
             revertFormAnim(button, buttonPretext);
         },
     });
-
+    
     return false;
 
+});
+
+$("body").on('click', "form:not(.no-ajax, .payment-load)", function() {
+    
 });
 
 $("body").on('click', ".file-upload button", function() {

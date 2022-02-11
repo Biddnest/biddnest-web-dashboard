@@ -406,7 +406,7 @@
                                 <div class="heading f-16 p-10 pl-4 border-around ">
                                   Images by Customer
                                 </div>
-                                <div class="row d-flex mr-2 justify-content-start  mt-2">
+                                <div class="row d-flex mr-2 justify-content-start  mt-2" style="padding: 15px;">
                                     @if(count(json_decode($booking->meta, true)['images']) === 0)
                                         <div class="col-sm-12 text-center" style="padding: 50px 0">
                                             <i>No image has been uploaded by the customer.</i>

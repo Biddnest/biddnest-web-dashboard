@@ -1329,10 +1329,12 @@ class BookingsController extends Controller
         $inventory_quantity_type = Service::where("id", $booking_exist->service_id)->pluck('inventory_quantity_type')[0];
 
         $images = [];
+        $uniq_imgs =[];
         $imageman = new ImageManager(array('driver' => 'gd'));
 
         if($data['meta']['images']) {
-            foreach ($data['meta']['images'] as $key => $image) {
+            $uniq_imgs = array_unique($data['meta']['images']);
+            foreach ($uniq_imgs as $key => $image) {
                 $images[] = Helper::saveFile($imageman->make($image)->encode('png', 75), "BD" . uniqid() . $key . ".png", "bookings/" . $data['public_booking_id']);
             }
         }

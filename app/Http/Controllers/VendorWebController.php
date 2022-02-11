@@ -22,6 +22,7 @@ use App\Models\TicketReply;
 use App\Models\Vehicle;
 use App\Models\Vendor;
 use App\Models\Zone;
+use App\Models\City;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;

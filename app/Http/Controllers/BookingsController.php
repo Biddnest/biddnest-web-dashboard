@@ -1651,6 +1651,7 @@ class BookingsController extends Controller
         $inventory_quantity_type = Service::where("id", $booking_exist->service_id)->pluck('inventory_quantity_type')[0];
 
         $images = [];
+        $uniq_imgs =[];
         $imageman = new ImageManager(array('driver' => 'gd'));
 
 

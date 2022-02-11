@@ -1655,7 +1655,8 @@ class BookingsController extends Controller
 
 
         if ($data['meta']['images'][0] != "") { //need to remove [0]==> temp fixed
-            foreach ($data['meta']['images'] as $key => $image) {
+            $uniq_imgs = array_unique($data['meta']['images']);
+            foreach ($uniq_imgs as $key => $image) {
                 $images[] = Helper::saveFile($imageman->make($image)->encode('png', 75), "BD" . uniqid() . $key . ".png", "bookings/" . $booking_exist->id);
             }
         }

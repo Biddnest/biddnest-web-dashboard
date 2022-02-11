@@ -74,9 +74,9 @@
                                     <li class="nav-item">
                                         <a class="nav-link" id="requirments-tab" href="{{route('vendor.my-bid',['id'=>$booking->public_booking_id])}}">My Bid</a>
                                     </li>
-                                    <li class="nav-item">
+                                   {{-- <li class="nav-item">
                                         <a class="nav-link disabled" id="requirments-tab" href="#">Schedule</a>
-                                    </li>
+                                    </li>--}}
                                 @elseif($booking->bid->status == \App\Enums\BidEnums::$STATUS['won'] && $booking->status == \App\Enums\BookingEnums::$STATUS['payment_pending'])
                                     {{--<li class="nav-item">
                                         <a class="nav-link disabled" id="requirments-tab" href="{{route('vendor.my-quote',['id'=>$booking->public_booking_id])}}">My Quote</a>

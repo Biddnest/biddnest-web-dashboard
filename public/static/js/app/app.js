@@ -113,7 +113,7 @@ $("body").on("submit", ".hero-booking-form", function(event) {
 });
 
 /* AJAX Universal */
-$("body").on('submit', "form:not(.no-ajax, .payment-load)", function() {
+$("body").on('submit', "form:not(.no-ajax)", function() {
     let form = $(this);
     let requestData = form.serializeJSON();
     let button = form.find("button[type=submit]");
@@ -121,8 +121,10 @@ $("body").on('submit', "form:not(.no-ajax, .payment-load)", function() {
     let buttonPretext = button.html();
     Logger.info("Loggin request payload", requestData);
 
-    if ($(".tandc").is(":checked")) {
-
+    if (form.hasClass("payment-load")) {
+        console.log("go");
+        redirectTo(form.data("url"));
+        return false;
     }
 
     $.ajax({
@@ -294,14 +296,11 @@ $("body").on('submit', "form:not(.no-ajax, .payment-load)", function() {
             revertFormAnim(button, buttonPretext);
         },
     });
-    
+
     return false;
 
 });
 
-$("body").on('click', "form:not(.no-ajax, .payment-load)", function() {
-    
-});
 
 $("body").on('click', ".file-upload button", function() {
     if ($(this).data('action') == "upload") {

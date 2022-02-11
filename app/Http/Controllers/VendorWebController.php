@@ -495,9 +495,9 @@ class VendorWebController extends Controller
     {
         $driver = Vendor::select(["id", "fname", "lname", "phone"])
             ->where("organization_id", Session::get('organization_id'))
-            ->where(["user_role" => VendorEnums::$ROLES['driver']])
+            ->where(["user_role" => VendorEnums::$ROLES['driver'], "deleted"=>CommonEnums::$NO])
             ->get();
-        $vehicle = Vehicle::select(["id", "name", "vehicle_type", "number"])->where("organization_id", Session::get('organization_id'))
+        $vehicle = Vehicle::select(["id", "name", "vehicle_type", "number"])->where("organization_id", Session::get('organization_id'))->where(["deleted"=>CommonEnums::$NO])
             ->get();
         $assigned_driver = BookingDriver::where('booking_id', Booking::where('public_booking_id', $request->id)->pluck('id')[0])->with('vehicle')->with('driver')->orderBy('id', 'DESC')->first();
         $booking = Booking::where('public_booking_id', $request->id)->first();

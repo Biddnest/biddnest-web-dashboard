@@ -99,7 +99,7 @@
                         <div class="col-sm-6">
                             <div class="form-input">
                                 <label class="zoneName">Zones</label>
-                                <select id="" class="form-control select-box" name="zones[]" multiple required>
+                                <select id="" class="form-control select-box" name="zones[]" multiple>
                                     <option value="">--Select--</option>
                                     @foreach($zones as $zone)
                                         <option value="{{$zone->id}}"

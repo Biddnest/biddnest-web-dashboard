@@ -61,6 +61,14 @@ class ZoneController extends Controller
             $zones->save();
         }
 
+        $is_zone_city = CityZone::where(['city_id'=>$city, 'zone_id'=>$zone->id])->first();
+        if($is_zone_city){
+            $cityzone = new CityZone();
+            $cityzone->city_id = $city;
+            $cityzone->zone_id = $zone->id;
+            $cityzone->save();
+        }
+
         if(!$result)
             return Helper::response(false,"Couldn't save zones.");
 
@@ -94,6 +102,14 @@ class ZoneController extends Controller
             $zc->lat = $cor['latitude'];
             $zc->lng = $cor['longitude'];
             $zc->save();
+        }
+
+        $is_zone_city = CityZone::where(['city_id'=>$city, 'zone_id'=>$id])->first();
+        if($is_zone_city){
+            $cityzone = new CityZone();
+            $cityzone->city_id = $city;
+            $cityzone->zone_id = $id;
+            $cityzone->save();
         }
 
 

@@ -1660,7 +1660,7 @@ class Route extends Controller
         $validation = Validator::make($request->all(),[
             'name'=>'required|string',
             'zones.*'=>'nullable',
-            'state'=>'required|string'
+            'state'=>'nullable|string'
         ]);
 
         if($validation->fails())
@@ -1675,7 +1675,7 @@ class Route extends Controller
             'id'=>'required',
             'name'=>'required|string',
             'zones.*'=>'nullable',
-            'state'=>'required|string'
+            'state'=>'nullable|string'
         ]);
 
         if($validation->fails())

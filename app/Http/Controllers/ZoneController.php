@@ -62,7 +62,7 @@ class ZoneController extends Controller
         }
 
         $is_zone_city = CityZone::where(['city_id'=>$city, 'zone_id'=>$zone->id])->first();
-        if($is_zone_city){
+        if(!$is_zone_city){
             $cityzone = new CityZone();
             $cityzone->city_id = $city;
             $cityzone->zone_id = $zone->id;
@@ -105,7 +105,7 @@ class ZoneController extends Controller
         }
 
         $is_zone_city = CityZone::where(['city_id'=>$city, 'zone_id'=>$id])->first();
-        if($is_zone_city){
+        if(!$is_zone_city){
             $cityzone = new CityZone();
             $cityzone->city_id = $city;
             $cityzone->zone_id = $id;

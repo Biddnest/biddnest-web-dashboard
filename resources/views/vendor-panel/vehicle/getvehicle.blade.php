@@ -43,7 +43,7 @@
                                         @if($exist_vehicle)
                                             <input type="hidden" value="{{$exist_vehicle->id}}" name="id">
                                         @endif
-                                        <label class="">Name of vehicle</label>
+                                        <label class="">Vehicle ID</label>
                                         <input type="text" id="fullname" name="name"
                                                    placeholder="Tempo" value="{{$exist_vehicle->name ?? ''}}"
                                                    class="form-control">
@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-input">
-                                        <label class="">Vehicle Number</label>
+                                        <label class="">Plate Number</label>
                                         <input type="text" id="fullname" name="number"
                                                    placeholder="XXXXX" value="{{$exist_vehicle->number ?? ''}}"
                                                    class="form-control">
@@ -84,8 +84,8 @@
 
                                     <thead class="secondg-bg bx-shadowg p-0 f-14">
                                     <tr class="">
-                                        <th scope="col" style="padding: 14px;">Vehicle Name</th>
-                                        <th scope="col" style="padding: 14px;">Vehicle Number</th>
+                                        <th scope="col" style="padding: 14px;">Vehicle ID</th>
+                                        <th scope="col" style="padding: 14px;">Number Plate</th>
                                         <th scope="col" style="padding: 14px;">Vehicle Type</th>
                                         @if(\App\Helper::is("admin", true))
                                             <th scope="col" style="padding: 14px;" class="text-center">Actions</th>

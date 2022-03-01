@@ -173,18 +173,39 @@
                                     </div>
                                 </div>
                             </div>
+                            @if($booking->status == \App\Enums\BookingEnums::$STATUS['cancelled'] || $booking->status == \App\Enums\BookingEnums::$STATUS['cancel_request'])
+                                <div class="d-flex  row  p-10">
+                                    <div class="col-sm-6">
+                                        <div class="theme-text f-14 bold">
+                                            Cancellation Reason
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="theme-text f-14">
+                                            {{json_decode($booking->cancelled_meta, true)['reason'] ?? "-"}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex  row  p-10">
+                                    <div class="col-sm-6">
+                                        <div class="theme-text f-14 bold">
+                                            Cancellation Description
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="theme-text f-14">
+                                            {{json_decode($booking->cancelled_meta, true)['desc'] ?? "-"}}
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                             <div class="d-flex  row  p-10 border-top-pop">
 
                                 <div class="col-sm-6">
                                     <div class="theme-text f-14 bold">
                                         Items to be moved
                                     </div>
-
                                 </div>
-
-
-
-
                             </div>
                             <table class="table text-center p-10 theme-text">
                                 <thead class="secondg-bg  p-0">

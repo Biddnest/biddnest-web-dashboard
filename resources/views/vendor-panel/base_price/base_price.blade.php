@@ -11,6 +11,7 @@
                 </a> -->
             </div>
         </div>
+
         <div class="d-flex  flex-row justify-content-between">
             <div class="page-head text-left  pt-0 pb-0 p-2">
                 <nav aria-label="breadcrumb">
@@ -19,6 +20,32 @@
                     </ol>
                 </nav>
 
+            </div>
+        </div>
+        <div class="d-flex  flex-row justify-content-between Dashboard-lcards ">
+            <div class="col-sm-12">
+                <div class="card  h-auto  p-8 p-0">
+                    <div class="header-wrap border-bottom p-15 pb-1">
+                        <h3 class="f-18 mt-1 mb-4 f-weight-500">Distance Information</h3>
+                    </div>
+                    <div class=" d-flex  row p-15 justify-content-start">
+                        <div class="col-sm-12 p-1 ml-3">
+                            <div class="branch-wrapper">
+                                <div class="branch-snip d-flex flex-row justify-content-around">
+                                    <div class="data-group">
+                                        <h5 style="font-size: 14px;">Base Distance Unit (KM)</h5>
+                                        <p>{{$org_info->base_distance}} KM</p>
+                                    </div>
+                                    <div class="data-group">
+                                        <h5 style="font-size: 14px;">Extra Distance Unit (KM)</h5>
+                                        <p>{{$org_info->additional_distance}} KM</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
         <div class="d-flex  flex-row justify-content-between Dashboard-lcards ">
@@ -83,8 +110,5 @@
                 </div>
             </div>
         </div>
-
-
-
     </div>
 @endsection

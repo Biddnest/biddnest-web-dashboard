@@ -578,14 +578,15 @@ class VendorWebController extends Controller
 
     public function basePrices(Request $request)
     {
-        $subservices = Subservice::where(["status" => CommonEnums::$YES, "deleted" => CommonEnums::$NO])->whereNotIn("name", ["custom"])
-            ->get();
+        $subservices = Subservice::where(["status" => CommonEnums::$YES, "deleted" => CommonEnums::$NO])->whereNotIn("name", ["custom"])->get();
 
         $vendor_price = SubservicePrice::where("organization_id", Session::get('organization_id'))->with('subservice')->get();
 
+        $org_info = Organization::where("id", Session::get('organization_id'))->first();
+
         // $add_subservices = Subservice::whereNotIn("id", SubservicePrice::where("organization_id", $request->id)->pluck('subservice_id'))->whereNotIn("name", ["custom"])->where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
 
-        return view('vendor-panel.base_price.base_price', ['id' => $request->id, 'subservices' => $subservices, "prices" => $vendor_price]);
+        return view('vendor-panel.base_price.base_price', ['id' => $request->id, 'subservices' => $subservices, "prices" => $vendor_price, "org_info"=>$org_info]);
     }
 
 }

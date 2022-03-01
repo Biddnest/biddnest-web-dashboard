@@ -19,23 +19,23 @@
         <!-- Dashboard cards -->
         <div class="vender-all-details">
             <div class="simple-card">
-                <p>New Orders</p>
+                <p>NEW ORDERS</p>
                 <h1>{{$count_booking}}</h1>
             </div>
             <div class="simple-card ">
-                <p>Participated Orders</p>
+                <p>PARTICIPATED ORDERS</p>
                 <h1>{{$participated_booking}}</h1>
             </div>
             <div class="simple-card ">
-                <p>Scheduled Orders</p>
+                <p>SCHEDULED ORDERS</p>
                 <h1>{{$schedul_booking}}</h1>
             </div>
             <div class="simple-card">
-                <p>Saved Orders</p>
+                <p>SAVED ORDERS</p>
                 <h1>{{$save_booking}}</h1>
             </div>
             <div class="simple-card ">
-                <p>Past Enquiries</p>
+                <p>PAST ENQUIRIES</p>
                 <h1>{{$past_booking}}</h1>
             </div>
 

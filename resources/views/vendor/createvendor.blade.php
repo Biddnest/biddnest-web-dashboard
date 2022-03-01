@@ -349,7 +349,7 @@
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
-                                            <label class="full-name">Extra Distance Unit (KM)</label>
+                                            <label class="full-name">Base Distance Unit (KM)</label>
                                             <span class="">
                                             <input type="text" name="basedist" data-parsley-type="number" placeholder="Distance"
                                                    class="form-control" required>
@@ -360,7 +360,7 @@
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
-                                            <label class="full-name">Extra Base distance in km</label>
+                                            <label class="full-name">Extra Distance Unit (KM)</label>
                                             <span class="">
                                             <input type="text" name="extrabasedist" data-parsley-type="number" placeholder="Extra Distance"
                                                    class="form-control" required>

@@ -64,6 +64,15 @@ if (env != "development")
 
 // getLocationPermission();
 
+
+//preventing form submit on enter
+$("body").on("keyup", "form input",function(event){
+    if(event.keyCode == 13){
+        return false;
+    }
+});
+
+
 /*Callback for hero form submit - always keep at top (has conflict issue)*/
 $("body").on("submit", ".hero-booking-form", function(event) {
 

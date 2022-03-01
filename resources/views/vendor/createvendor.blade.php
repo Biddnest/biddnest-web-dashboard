@@ -125,7 +125,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="phone-num-lable">Secondary Contact Number</label>
-                                            <input type="text" id="phone-pop-up" placeholder="9876543210" class="form-control phone" name="phone[secondory]" maxlength="10" minlength="10" required>
+                                            <input type="text" id="phone-pop-up" placeholder="9876543210" class="form-control phone" name="phone[secondory]" maxlength="10" minlength="10">
                                             <span class="error-message">Please enter valid Phone number</span>
                                         </div>
                                     </div>
@@ -153,7 +153,7 @@
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
-                                            <label class="full-name">GSTIN Number of Organisation</label>
+                                            <label class="full-name">Tax Identification Number of Organisation</label>
                                             <input type="text" id="fullname" placeholder="GST12355464" class="form-control alphanum" name="organization[gstin]" maxlength="15" minlength="15" required >
                                             <span class="error-message">Please enter valid
                                                                 Organization Name</span>
@@ -349,7 +349,7 @@
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
-                                            <label class="full-name">Base distance in km</label>
+                                            <label class="full-name">Extra Distance Unit (KM)</label>
                                             <span class="">
                                             <input type="text" name="basedist" data-parsley-type="number" placeholder="Distance"
                                                    class="form-control" required>

@@ -57,6 +57,19 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="d-flex  row  p-10">
+                                <div class="col-sm-6">
+                                    <div class="theme-text f-14 bold">
+                                        Customer Phone
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="theme-text f-14">
+                                        {{$booking->user->phone}}
+                                    </div>
+                                </div>
+                            </div>
                             <div class="d-flex  row  p-10">
                                 <div class="col-sm-6">
                                     <div class="theme-text f-14 bold">

@@ -189,6 +189,7 @@
                       </div>
                 </div>
               </div>
+    
     <script type="text/html" id="banner-form">
 
         <div class="d-flex row p-20 banner-form-wrapper relative">

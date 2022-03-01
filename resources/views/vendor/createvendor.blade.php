@@ -78,11 +78,11 @@
                                             <img class="upload-preview" src="{{asset('static/images/upload-image.svg')}}" alt=""/>
                                             <div class="ml-1">
                                                 <div class="file-upload">
-                                                    <input type="hidden" class="base-holder" name="image" value="" required/>
+                                                    <input type="hidden" class="base-holder" name="image" value="" />
                                                     <button type="button" class="btn theme-bg white-text my-0"  data-action="upload">
                                                         UPLOAD IMAGE
                                                     </button>
-                                                    <input type="file" accept=".png,.jpg,.jpeg" required/>
+                                                    <input type="file" accept=".png,.jpg,.jpeg" />
                                                 </div>
                                                 <p class="text-black">Max File size: 1MB</p>
                                             </div>

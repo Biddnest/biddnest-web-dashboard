@@ -74,14 +74,14 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Bank Name </label>
-                                    <input type="text" id="fullname" placeholder="ICICI Bank" value="@if($bank) {{json_decode($bank->banking_details, true)['bank_name']}}@endif" name="bank_name" class="form-control alphabet" required>
+                                    <input type="text" id="fullname" placeholder="ICICI Bank" value="@if($bank) {{json_decode($bank->banking_details, true)['bank_name']}}@endif" name="bank_name" class="form-control alpha" required>
                                     <span class="error-message">Please enter valid Bank Name</span>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Account Holder Name </label>
-                                    <input type="text" id="fullname" placeholder="David Jerome" value="@if($bank) {{json_decode($bank->banking_details, true)['holder_name']}}@endif" name="holder_name" class="form-control alphabet" required>
+                                    <input type="text" id="fullname" placeholder="David Jerome" value="@if($bank) {{json_decode($bank->banking_details, true)['holder_name']}}@endif" name="holder_name" class="form-control alpha" required>
                                     <span class="error-message">Please enter valid Account Holder Name</span>
                                 </div>
                             </div>

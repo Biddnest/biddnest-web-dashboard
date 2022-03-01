@@ -135,7 +135,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Organization Name</label>
-                                            <input type="text" id="fullname" value="{{ucfirst(trans($organization->org_name))}}" placeholder="Wayne Pvt Ltd" class="form-control alpha number" name="organization[org_name]" required>
+                                            <input type="text" id="fullname" value="{{ucfirst(trans($organization->org_name))}}" placeholder="Wayne Pvt Ltd" class="form-control alphanum" name="organization[org_name]" required>
                                             <span class="error-message">Please enter valid Organization Name</span>
                                         </div>
                                     </div>

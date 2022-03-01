@@ -47,6 +47,10 @@ class InventoryController extends Controller
 
     public static function add($name, $material, $size, $image, $category, $icon)
     {
+        $item_exist= Inventory::where(['name'=>$name, 'category'=>$category, 'status'=>CommonEnums::$NO])->first();
+
+        if($item_exist)
+            return Helper::response(false,"This invenetory item is already exist");
 
         $image_name = "inventory-image".$name."-".uniqid().".png";
         $icon_name = "inventory-icon".$name."-".uniqid().".png";
@@ -76,6 +80,12 @@ class InventoryController extends Controller
 
     public static function update($id, $name, $material, $size, $image, $category, $icon)
     {
+        $item_exist= Inventory::where(['name'=>$name, 'category'=>$category, 'status'=>CommonEnums::$NO])->first();
+
+        if(!$item_exist)
+            return Helper::response(false,"This invenetory item does not exist");
+
+
         $image_man = new ImageManager(array('driver' => 'gd'));
         $image_name = "inventory-image-".$name."-".uniqid().".png";
         $icon_name = "inventory-icon-".$name."-".uniqid().".png";

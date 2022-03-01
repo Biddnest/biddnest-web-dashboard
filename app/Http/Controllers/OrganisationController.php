@@ -54,7 +54,12 @@ class OrganisationController extends Controller
         $organizations=new Organization;
         $image = $data['image'];
         $uniq = uniqid();
-        $organizations->image=Helper::saveFile($imageman->make($image)->encode('png', 75),"BD".$uniq.".png","vendors/".$uniq.$data['organization']['org_name']);
+        if($image)
+            $organizations->image=Helper::saveFile($imageman->make($image)->encode('png', 75),"BD".$uniq.".png","vendors/".$uniq.$data['organization']['org_name']);
+        else{
+            $organizations->image=Helper::saveFile(Helper::generateAvatar($data['organization']['org_name']),"BD".$uniq.".png","vendors/".$uniq.$data['organization']['org_name']);
+        }
+
         $organizations->email=$data['email'];
         $organizations->phone=$data['phone']['primary'];
         $organizations->org_name=$data['organization']['org_name'];

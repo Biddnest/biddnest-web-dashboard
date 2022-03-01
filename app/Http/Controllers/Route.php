@@ -296,7 +296,7 @@ class Route extends Controller
     public function vendor_add(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'image'=>'required|string',
+            'image'=>'nullable|string',
             'fname' => 'required|string',
             'lname' => 'required|string',
             'email' => 'required|string',

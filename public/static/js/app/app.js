@@ -62,8 +62,6 @@ if (env != "development")
     Logger.setLevel(Logger.OFF);
 
 
-
-
 // getLocationPermission();
 
 /*Callback for hero form submit - always keep at top (has conflict issue)*/
@@ -2091,7 +2089,7 @@ $("body").on('keypress', ".alphanum", function(event) {
         (event.keyCode == 8) || (event.keyCode == 9) || event.ctrlKey || event.altKey ||
         (65 <= event.keyCode && event.keyCode <= 90 && event.shiftKey == true) ||
         (event.keyCode >= 34 && event.keyCode <= 40) ||
-        (event.keyCode == 46));
+        (event.keyCode == 46) || (event.keyCode == 32));
 
 });
 
@@ -2392,7 +2390,7 @@ $("body").on('keydown', ".alpha", function(event) {
         (65 <= event.keyCode && event.keyCode <= 90 && event.shiftKey == true) ||
         (65 <= event.keyCode && event.keyCode <= 90) || (event.keyCode == 8) || (event.keyCode == 9) ||
         (event.keyCode >= 34 && event.keyCode <= 40) ||
-        (event.keyCode == 46));
+        (event.keyCode == 46) || (event.keyCode == 32));
 });
 
 

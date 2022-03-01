@@ -8,10 +8,12 @@ function changeMenu(){
             // $(this).parent().parent().prev("li").addClass("active-menu-item");
 
             // $('.active-menu-item').removeClass("active-menu-item");
+            // $(this).addClass("text-yellow");
             $(this).parent().addClass("active-menu-item");
             // return false;
         }
         else{
+            // $(this).removeClass("text-yellow");
             $(this).parent().removeClass("active-menu-item");
         }
     });
@@ -22,15 +24,18 @@ function changeMenu(){
 
         if ($(this).attr("href") == url ) {
             // console.log("match");
+            $(this).addClass("text-yellow");
             $(this).parent().parent().prev("li").addClass("active-menu-item");
             $(this).parent().parent().slideDown(200).show();
             $(this).parent().addClass("active-sub-menu-item");
             return false;
-        }/*else{
-            $(this).parent().parent().slideUp(200).hide();
-
-        }*/
+        }else{
+            $(this).removeClass("text-yellow");
+            // $(this).parent().parent().slideUp(200).hide();
+        }
     });
+
+    $("form").attr("onEnter");
 }
 
 import {

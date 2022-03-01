@@ -127,7 +127,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="phone-num-lable">Secondary Contact Number</label>
-                                            <input type="tel" id="phone-pop-up" value="{{json_decode($organization->meta, true)['secondory_phone'] ?? ''}}" placeholder="9876543210" class="form-control phone" name="phone[secondory]" maxlength="10" minlength="10" required>
+                                            <input type="tel" id="phone-pop-up" value="{{json_decode($organization->meta, true)['secondory_phone'] ?? ''}}" placeholder="9876543210" class="form-control phone" name="phone[secondory]" maxlength="10" minlength="10">
                                             <span class="error-message">Please enter valid Phone number</span>
                                         </div>
                                     </div>
@@ -152,7 +152,7 @@
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
-                                            <label class="full-name">GSTIN Number of Organisation</label>
+                                            <label class="full-name">Tax Identification Number of Organisation</label>
                                             <input type="text" id="fullname" value="{{json_decode($organization->meta, true)['gstin_no'] ?? ''}}" placeholder="GST12355464" class="form-control" name="organization[gstin]" maxlength="15" minlength="15" data-parsley-type="alphanum" required>
                                             <span class="error-message">Please enter valid GST Name</span>
                                         </div>
@@ -316,7 +316,7 @@
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
-                                            <label class="full-name">Base distance in km</label>
+                                            <label class="full-name">Extra Distance Unit (KM)</label>
                                             <span class="">
                                             <input type="text" name="basedist" data-parsley-type="number" placeholder="Distance" value="{{$organization->base_distance}}"
                                                    class="form-control" required>

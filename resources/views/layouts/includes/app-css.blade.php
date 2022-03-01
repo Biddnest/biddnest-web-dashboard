@@ -1197,4 +1197,8 @@
                 background-position-y: 5px !important;
                 padding-right: 20px !important;
             }
+
+            a.text-yellow, .text-yellow{
+                color: #FDC403 !important;
+            }
         </style>

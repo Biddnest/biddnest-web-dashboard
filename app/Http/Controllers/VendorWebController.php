@@ -22,6 +22,7 @@ use App\Models\TicketReply;
 use App\Models\Vehicle;
 use App\Models\Vendor;
 use App\Models\Zone;
+use App\Models\City;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
@@ -361,8 +362,8 @@ class VendorWebController extends Controller
         $zones = Zone::where(["status" => CommonEnums::$YES, "deleted" => CommonEnums::$NO])->get();
         $organization = Organization::where(["id" => Session::get('organization_id'), "deleted" => CommonEnums::$NO])->first();
         $services = Service::where(["status" => CommonEnums::$YES, "deleted" => CommonEnums::$NO])->get();
-        $Cities = City::where(["status" => CommonEnums::$YES, "deleted" => CommonEnums::$NO])->get();
-        return view('vendor-panel.branch.add_branch', ['id' => Session::get('organization_id'), 'services' => $services, 'organization' => $organization, 'zones' => $zones, 'branch' => $branch, 'cities' => $Cities]);
+        $cities = City::where(["status" => CommonEnums::$YES, "deleted" => CommonEnums::$NO])->get();
+        return view('vendor-panel.branch.add_branch', ['id' => Session::get('organization_id'), 'services' => $services, 'organization' => $organization, 'zones' => $zones, 'branch' => $branch, 'cities' => $cities]);
     }
 
     public function serviceRequestAdd()
@@ -494,9 +495,9 @@ class VendorWebController extends Controller
     {
         $driver = Vendor::select(["id", "fname", "lname", "phone"])
             ->where("organization_id", Session::get('organization_id'))
-            ->where(["user_role" => VendorEnums::$ROLES['driver']])
+            ->where(["user_role" => VendorEnums::$ROLES['driver'], "deleted"=>CommonEnums::$NO])
             ->get();
-        $vehicle = Vehicle::select(["id", "name", "vehicle_type", "number"])->where("organization_id", Session::get('organization_id'))
+        $vehicle = Vehicle::select(["id", "name", "vehicle_type", "number"])->where("organization_id", Session::get('organization_id'))->where(["deleted"=>CommonEnums::$NO])
             ->get();
         $assigned_driver = BookingDriver::where('booking_id', Booking::where('public_booking_id', $request->id)->pluck('id')[0])->with('vehicle')->with('driver')->orderBy('id', 'DESC')->first();
         $booking = Booking::where('public_booking_id', $request->id)->first();

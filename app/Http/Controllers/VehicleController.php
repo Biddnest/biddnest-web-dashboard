@@ -70,7 +70,7 @@ class VehicleController extends Controller
     {
         $get_driver = Vendor::select(["id", "fname", "lname", "phone"])
             ->where("organization_id", $organization_id)
-            ->where(["user_role" => VendorEnums::$ROLES['driver']])
+            ->where(["user_role" => VendorEnums::$ROLES['driver'], "deleted"=>CommonEnums::$NO])
             ->get();
 
         if (!$get_driver)
@@ -81,7 +81,7 @@ class VehicleController extends Controller
 
     public static function getVehicles($organization_id, $web=false)
     {
-        $get_vehicle = Vehicle::select(["id", "name", "vehicle_type", "number"])->where("organization_id", $organization_id)
+        $get_vehicle = Vehicle::select(["id", "name", "vehicle_type", "number"])->where("organization_id", $organization_id)->where(["deleted"=>CommonEnums::$NO])
             ->get();
 
         if (!$get_vehicle)

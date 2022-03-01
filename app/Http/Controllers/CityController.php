@@ -23,14 +23,17 @@ class CityController extends Controller
         $city->state = $state;
         $result= $city->save();
 
-        foreach($zones as $zone){
-            $zones = new CityZone;
-            $zones->city_id =$city->id;
-            $zones->zone_id = $zone;
-            $zones->save();
+        if($zones){
+            foreach($zones as $zone){
+                $zones = new CityZone;
+                $zones->city_id =$city->id;
+                $zones->zone_id = $zone;
+                $zones->save();
 
-            Zone::where("id", $zone)->update(['city_id'=>$city->id]);
+                Zone::where("id", $zone)->update(['city_id'=>$city->id]);
+            }
         }
+
 
         if(!$result)
             return Helper::response(false,"Couldn't save city.");
@@ -50,16 +53,18 @@ class CityController extends Controller
                 "state"=>$state
             ]);
 
-        CityZone::where("city_id", $id)->delete();
-        foreach($zones as $zone){
-            $zones = new CityZone;
-            $zones->city_id =$id;
-            $zones->zone_id = $zone;
-            $zones->save();
+        if($zones){
+            CityZone::where("city_id", $id)->delete();
+            foreach($zones as $zone){
+                $zones = new CityZone;
+                $zones->city_id =$id;
+                $zones->zone_id = $zone;
+                $zones->save();
 
-            Zone::where("id", $zone)->update(['city_id'=>$id]);
+                Zone::where("id", $zone)->update(['city_id'=>$id]);
+            }
         }
-
+        
         if(!$result_update)
             return Helper::response(false,"Couldn't update city.");
 

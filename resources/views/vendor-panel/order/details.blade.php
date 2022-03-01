@@ -138,6 +138,10 @@
                                     <li class="nav-item">
                                         <a class="nav-link" id="requirments-tab" href="{{route('vendor.complete-order',['id'=>$booking->public_booking_id])}}">Complete</a>
                                     </li>
+                                @elseif($bidding->status == \App\Enums\BidEnums::$STATUS['lost'])
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="requirments-tab" href="{{route('vendor.my-bid',['id'=>$booking->public_booking_id])}}">My Bid</a>
+                                    </li>
                                 @endif
                             </ul>
                         </div>
@@ -250,7 +254,7 @@
 
 
                                     <div class="d-flex pb-2 pt-1 justify-content-end button-section bidding-actions @if($bidding->watcher_id && $bidding->watcher_id != session('account')['id']) hidden @endif">
-                                        @if($booking->bid->status == \App\Enums\BidEnums::$STATUS['active'])
+                                        @if($bidding->status == \App\Enums\BidEnums::$STATUS['active'])
                                             <a href="#" class="bookings inline-icon-button" data-url="{{route('api.booking.bookmark', ['id'=>$booking->public_booking_id])}}" data-confirm="Do you want add this booking in Bookmarked?">
                                                 <button class="btn theme-br theme-text  white-bg  justify-content-center">Quote Later</button>
                                             </a>

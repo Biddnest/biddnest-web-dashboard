@@ -115,6 +115,10 @@
                                     <li class="nav-item">
                                         <a class="nav-link" id="requirments-tab" href="{{route('vendor.complete-order',['id'=>$booking->public_booking_id])}}">Complete</a>
                                     </li>
+                                @elseif($bid_status == \App\Enums\BidEnums::$STATUS['lost'])
+                                    <li class="nav-item">
+                                        <a class="nav-link active show" id="requirments-tab" href="{{route('vendor.my-bid',['id'=>$booking->public_booking_id])}}">My Bid</a>
+                                    </li>
                                 @endif
                             </ul>
                         </div>
@@ -188,7 +192,7 @@
                                                                 <span>{{$mdate}} </span>
                                                             @endforeach
                                                         </div>
-                
+
                                                 </div>
                                                 <div class="d-flex justify-content-between detail-order">
                                                     <div class="data">CATEGORY</div>
@@ -220,7 +224,7 @@
                                                         <p>Estimated Price</p>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="d-flex justify-content-between  detail-order">
                                                     <div class="data">ORDER ID</div>
                                                     <div class="value">#{{$booking->public_booking_id}}</div>

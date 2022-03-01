@@ -130,6 +130,12 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
     let buttonPretext = button.html();
     Logger.info("Loggin request payload", requestData);
 
+    if (form.hasClass("payment-load")) {
+        console.log("go");
+        redirectTo(form.data("url"));
+        return false;
+    }
+
     $.ajax({
         url: form.attr("action"),
         method: form.attr("method"),
@@ -303,6 +309,7 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
     return false;
 
 });
+
 
 $("body").on('click', ".file-upload button", function() {
     if ($(this).data('action') == "upload") {

@@ -104,19 +104,16 @@
                                         </div>
                                     </div>
                                 </div>
+                                <form data-url="{{route('payment',['id'=>$booking->public_booking_id])}}" class="payment-load" data-parsley-validate>
                                     <div class="accordion" id="comments">
                                         <div class="d-flex justify-content-center">
                                             <div class="form-groups">
-                                                <label class="container-01">
-                                                    <input type="checkbox" id="Lift1" required/>
-                                                    <span class="checkmark-agree -mt-10"></span>
+                                                <label class="container-01 m-0 p-0">
+                                                    <input type="checkbox" id="Lift1" data-parsley-error-message="Please Agree to the Terms & Conditions" required/>
+                                                    <span class="checkmark-agree" style="height: 14px !important; width: 14px !important; top: 2px !important;"></span>
+                                                    <p class="text-muted f-14" style="margin-left: 20px;"> By proceeding, you agree to our <b style="cursor: pointer;" onclick="location.assign('{{route('terms.page', ["slug"=>"terms-and-conditions"])}}')">Terms & Conditions</b></p>
                                                 </label>
-
-                                                <span class="error-message">Please enter valid</span>
                                             </div>
-                                            <p class="text-muted center mt-2 pl-0">
-                                                By proceeding, you agree to our Terms & Conditions
-                                            </p>
                                         </div>
 
                                         <div class="button-bottom d-flex justify-content-between pt-4">
@@ -125,14 +122,15 @@
                                                         class="btn btn-theme-w-bg">Reject</button></a>
                                             </div>
                                             <div class="">
-                                                <a href="{{route('payment',['id'=>$booking->public_booking_id])}}">
-                                                    <button class="btn btn-theme-bg white-bg">
+                                                <a href="#">
+                                                    <button type="submit" class="btn btn-theme-bg white-bg">
                                                         Pay & Confirm
                                                     </button>
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
+                                </form>
                             </div>
                         @endif
                         <div class="modal fade" id="reject-modal" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">

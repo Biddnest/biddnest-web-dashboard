@@ -54,14 +54,14 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Account Number </label>
-                                            <input type="text" id="fullname" placeholder="6231248590"  name="acc_no" value="@if($users){{json_decode($users->bank_meta, true)['acc_no'] ?? ''}}@endif" class="form-control" required>
+                                            <input type="text" id="fullname" placeholder="6231248590"  name="acc_no" value="@if($users){{json_decode($users->bank_meta, true)['acc_no'] ?? ''}}@endif" class="form-control">
                                             <span class="error-message">Please enter valid Account Number</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Bank Name </label>
-                                            <input type="text" id="fullname" placeholder="ICICI Bank"  name="bank_name" value="@if($users){{json_decode($users->bank_meta, true)['bank_name'] ?? ''}}@endif" class="form-control" required>
+                                            <input type="text" id="fullname" placeholder="ICICI Bank"  name="bank_name" value="@if($users){{json_decode($users->bank_meta, true)['bank_name'] ?? ''}}@endif" class="form-control">
                                             <span class="error-message">Please enter valid
                                                 Bank Name</span>
                                         </div>
@@ -69,7 +69,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Account Holder Name </label>
-                                            <input type="text" id="fullname" placeholder="David Jerome"  name="holder_name" required value="@if($users){{json_decode($users->bank_meta, true)['holder_name'] ?? ''}}@endif" class="form-control">
+                                            <input type="text" id="fullname" placeholder="David Jerome"  name="holder_name" value="@if($users){{json_decode($users->bank_meta, true)['holder_name'] ?? ''}}@endif" class="form-control">
                                             <span class="error-message">Please enter valid
                                                 Account Holder Name</span>
                                         </div>
@@ -77,7 +77,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">IFSC Code </label>
-                                            <input type="text" id="fullname" placeholder="ICI0012145"  name="ifsc" required value="@if($users){{json_decode($users->bank_meta, true)['ifsc'] ?? ''}}@endif" class="form-control">
+                                            <input type="text" id="fullname" placeholder="ICI0012145"  name="ifsc" value="@if($users){{json_decode($users->bank_meta, true)['ifsc'] ?? ''}}@endif" class="form-control">
                                             <span class="error-message">Please enter valid
                                                 IFSC Code</span>
                                         </div>
@@ -92,31 +92,31 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-6">
                                         <p class="img-label">Aadhaar Card</p>
                                         <div class="upload-section p-20 pt-0">
                                             <img class="upload-preview" src="@if(!$users->aadhar_img){{asset('static/images/upload-image.svg')}}@else{{$users->aadhar_img}}@endif" alt=""/>
                                             <div class="ml-1">
                                                 <div class="file-upload">
-                                                    <input type="hidden" class="base-holder" name="aadhar_image" value="@if($users){{$users->aadhar_img}}@endif" required />
+                                                    <input type="hidden" class="base-holder" name="aadhar_image" value="@if($users){{$users->aadhar_img}}@endif"/>
                                                     <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                                                         UPLOAD IMAGE
                                                     </button>
-                                                    <input type="file" accept=".png,.jpg,.jpeg" @if(!$users) required @endif/>
+                                                    <input type="file" accept=".png,.jpg,.jpeg" />
                                                 </div>
                                                 <p class="text-black">Max File size: 1MB</p>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-6">
                                         <p class="img-label">PAN Card</p>
                                         <div class="upload-section p-20 pt-0">
                                             <img class="upload-preview" src="@if(!$users->pan_img){{asset('static/images/upload-image.svg')}}@else{{$users->pan_img}}@endif" alt=""/>
                                             <div class="ml-1">
                                                 <div class="file-upload">
                                                     <input type="file" />
-                                                    <input type="hidden" class="base-holder" name="pan_image" value="@if($users){{$users->pan_img}}@endif" required />
+                                                    <input type="hidden" class="base-holder" name="pan_image" value="@if($users){{$users->pan_img}}@endif" />
                                                     <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                                                         UPLOAD IMAGE
                                                     </button>

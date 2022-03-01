@@ -81,21 +81,21 @@
                             <div class="d-flex row p-20">
                                 <div class="col-lg-6">
                                     <div class="form-input">
-                                        <label class="full-name">Employee First Name</label>
+                                        <label class="full-name">Employee First Name <span style="color: red">*</span> </label>
                                         <input type="text" id="fullname" placeholder="David" name="fname" value="@if($users){{ucfirst(trans($users->fname))}}@endif" class="form-control" required>
                                         <span class="error-message">Please enter valid First Name</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-input">
-                                        <label class="full-name">Employee Last Name</label>
+                                        <label class="full-name">Employee Last Name <span style="color: red">*</span></label>
                                             <input type="text" id="fullname" placeholder="Jerome" value="@if($users){{ucfirst(trans($users->lname))}}@endif" name="lname" class="form-control" required>
                                             <span class="error-message">Please enter valid Last Name</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-input">
-                                        <label class="full-name">Employee ID/ Username</label>
+                                        <label class="full-name">Employee ID/ Username <span style="color: red">*</span></label>
                                         <input type="text" id="fullname" placeholder="0016" name="username" class="form-control" value="@if($users){{$users->username}}@endif" required>
                                         <span class="error-message">Please enter valid</span>
                                     </div>
@@ -103,7 +103,7 @@
                                 @if(!$users || !$users->password)
                                     <div class="col-lg-6">
                                         <div class="form-input">
-                                            <label class="full-name">Employee Password</label>
+                                            <label class="full-name">Employee Password <span style="color: red">*</span></label>
                                             <input type="password" id="fullname" placeholder="Password" name="password" required class="form-control">
                                             <span class="error-message">Please enter valid Password</span>
                                         </div>
@@ -111,7 +111,7 @@
                                 @endif
                                 <div class="col-lg-6">
                                     <div class="form-input">
-                                        <label class="full-name">Employee Role</label>
+                                        <label class="full-name">Employee Role <span style="color: red">*</span></label>
                                         <select id="role" name="role" class="form-control field-toggle" data-value="2" data-target=".zones" required>
                                             <option value="">--Select--</option>
                                             @foreach(\App\Enums\AdminEnums::$ROLES as $key=>$role)
@@ -148,7 +148,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-input">
-                                        <label class="phone-num-lable">Phone Number</label>
+                                        <label class="phone-num-lable">Phone Number <span style="color: red">*</span></label>
                                         <input type="tel" id="phone" placeholder="987654321" name="phone" maxlength="10" minlength="10" class=" form-control" value="@if($users){{$users->phone}}@endif" required>
                                         <span class="error-message">Please enter valid Phone number</span>
                                     </div>
@@ -162,14 +162,14 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-input">
-                                        <label class="full-name">Email ID</label>
+                                        <label class="full-name">Email ID <span style="color: red">*</span></label>
                                         <input type="email" id="email" placeholder="admin@gmail.com" value="@if($users){{$users->email}}@endif" class="form-control" name="email" required>
                                         <span class="error-message">Please enter valid</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-input">
-                                        <label class="phone-num-lable">Gender</label>
+                                        <label class="phone-num-lable">Gender <span style="color: red">*</span></label>
                                         <select  id="" class="form-control" name="meta[gender]" required>
                                             <option value="">--Select--</option>
                                             <option value="male" @if($users && (json_decode($users->meta, true)['gender'] == "male")) selected @endif>Male</option>
@@ -181,7 +181,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-input">
-                                        <label class="full-name">Date of Birth</label>
+                                        <label class="full-name">Date of Birth <span style="color: red">*</span></label>
                                         <input type="text" class=" form-control br-5 birthdate dateselect" value="@if($users){{$users->dob}}@endif" name="dob" required="required"  placeholder="15/02/2021"/>
                                         <span class="error-message">Please enter valid</span>
                                     </div>
@@ -195,14 +195,14 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-input">
-                                        <label class="full-name">Educational Qualifications</label>
+                                        <label class="full-name">Educational Qualifications <span style="color: red">*</span></label>
                                         <input type="text" id="fullname" placeholder="Btech Mechanical" name="meta[education]" class="form-control" value="@if($users){{json_decode($users->meta, true)['education'] ?? ''}}@endif" required>
                                         <span class="error-message">Please enter valid</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-input">
-                                        <label class="full-name">PAN Card Number</label>
+                                        <label class="full-name">PAN Card Number <span style="color: red">*</span></label>
                                         {{-- <input type="text" id="fullname" placeholder="btech Mechanical" name="meta[pan_no]" class="form-control" value="@if($users){{json_decode($users->meta, true)['pan_no']}}@endif" required>--}}
                                         <input type="text" id="fullname" placeholder="btech Mechanical" class="form-control" name="meta[pan_no]" value="@if($users){{substr(json_decode($users->meta, true)['pan_no'], 0, 4).str_repeat("X", strlen(json_decode($users->meta, true)['pan_no'])-4)}}@endif" required @if($users) readonly @endif>
                                         <span class="error-message">Please enter valid</span>
@@ -210,7 +210,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-input">
-                                        <label class="full-name">Aadhar Card Number</label>
+                                        <label class="full-name">Aadhar Card Number <span style="color: red">*</span></label>
                                         {{--  <input type="text" id="fullname" name="meta[adhar_no]" placeholder="btech Mechanical" class="form-control" value="@if($users){{json_decode($users->meta, true)['aadha_no']}}@endif" required>--}}
                                         <input type="text" id="fullname" placeholder="btech Mechanical" name="meta[adhar_no]"  class="form-control" value="@if($users){{substr(json_decode($users->meta, true)['aadha_no'], 0, 4).str_repeat("X", strlen(json_decode($users->meta, true)['aadha_no'])-4)}}@endif" required @if($users) readonly @endif>
                                         <span class="error-message">Please enter valid</span>
@@ -218,21 +218,21 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-input">
-                                        <label class="full-name">Address Line 1</label>
+                                        <label class="full-name">Address Line 1 <span style="color: red">*</span></label>
                                         <input type="text" id="fullname" placeholder="" name="meta[address_line1]" required class="form-control" value="@if($users){{json_decode($users->meta, true)['address_line1']}}@endif">
                                         <span class="error-message">Please enter validAddress Line</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-input">
-                                        <label class="full-name">Address Line 2</label>
+                                        <label class="full-name">Address Line 2 <span style="color: red">*</span></label>
                                         <input type="text" id="fullname" placeholder="" name="meta[address_line2]" required  class="form-control" value="@if($users){{json_decode($users->meta, true)['address_line2']}}@endif">
                                         <span class="error-message">Please enter valid Address Line</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-input">
-                                        <label class="full-name">State</label>
+                                        <label class="full-name">State <span style="color: red">*</span></label>
                                         <select id="" class="form-control" name="state" required>
                                             <option value="">--Select--</option>
                                             <option value="Andhra Pradesh" @if($users && ($users->state=="Andhra Pradesh")) selected @endif>Andhra Pradesh</option>
@@ -277,21 +277,21 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-input">
-                                        <label class="full-name">City</label>
+                                        <label class="full-name">City <span style="color: red">*</span></label>
                                         <input type="text" id="fullname" name="city" required placeholder="" class="form-control" value="@if($users){{$users->city}}@endif">
                                         <span class="error-message">Please enter valid Zone</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-input">
-                                        <label class="full-name">Pincode</label>
+                                        <label class="full-name">Pincode <span style="color: red">*</span></label>
                                         <input type="text" id="fullname" placeholder="" name="pincode" maxlength="6" minlength="6" value="@if($users){{$users->pincode}}@endif" required class="form-control">
                                         <span class="error-message">Please enter valid Pincode</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-input">
-                                        <label class="full-name">Date of Joining</label>
+                                        <label class="full-name">Date of Joining <span style="color: red">*</span></label>
                                         <input type="text" class=" form-control br-5 filterdate dateselect" name="joinig_date" required="required"  value="@if($users){{$users->date_of_joining}}@endif"   placeholder="15/02/2021"/>
                                         <span class="error-message">Please enter valid Pincode</span>
                                     </div>

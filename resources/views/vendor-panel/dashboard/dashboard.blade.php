@@ -128,10 +128,10 @@
                 <div class="card p-10 pl-0 pr-0">
                     <div class="d-flex flex-row justify-content-between">
                         <div class="p-10 card-head right text-left">
-                            <h3 class="f-18 mt-0 ml-4">Live Orders</h3>
+                            <h3 class="f-18 mt-0 ml-4">Live Enquiry</h3>
                         </div>
                         <div class="p-10 card-head left mr-4">
-                         
+
                         </div>
 
                     </div>

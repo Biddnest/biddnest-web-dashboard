@@ -1042,13 +1042,13 @@ class Route extends Controller
     {
         $validation = Validator::make($request->all(),[
             'id'=>'required',
-            'acc_no'=>'required',
-            'bank_name'=>'required|string',
-            'holder_name'=>'required|string',
-            'ifsc'=>'required',
-            'branch_name'=>'required|string',
-            'aadhar_image'=>'required',
-            'pan_image'=>'required'
+            'acc_no'=>'nullable',
+            'bank_name'=>'nullable|string',
+            'holder_name'=>'nullable|string',
+            'ifsc'=>'nullable',
+            'branch_name'=>'nullable|string',
+            'aadhar_image'=>'nullable',
+            'pan_image'=>'nullable'
         ]);
 
         if($validation->fails())

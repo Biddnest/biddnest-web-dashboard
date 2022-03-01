@@ -19,7 +19,7 @@
         <!-- Dashboard cards -->
         <div class="vender-all-details">
             <div class="simple-card">
-                <p>NEW ORDERS</p>
+                <p>New Orders</p>
                 <h1>{{$count_booking}}</h1>
             </div>
             <div class="simple-card ">
@@ -35,7 +35,7 @@
                 <h1>{{$save_booking}}</h1>
             </div>
             <div class="simple-card ">
-                <p>Past Orders</p>
+                <p>Past Enquiries</p>
                 <h1>{{$past_booking}}</h1>
             </div>
 

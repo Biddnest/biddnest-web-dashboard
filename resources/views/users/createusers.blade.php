@@ -189,7 +189,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="full-name">Date of Relieving</label>
-                                        <input type="text" id="fullname" placeholder="yyyy-mm-dd" name="meta[dor]" class="form-control filterdate dateselect" value="@if($users){{json_decode($users->meta, true)['dor'] ?? ''}}@endif" required>
+                                        <input type="text" id="fullname" placeholder="yyyy-mm-dd" name="meta[dor]" class="form-control filterdate dateselect" value="@if($users){{json_decode($users->meta, true)['dor'] ?? ''}}@endif">
                                         <span class="error-message">Please enter valid</span>
                                     </div>
                                 </div>

@@ -47,7 +47,7 @@
                                         <div class="form-input">
                                             <label class="full-name">Organization Name</label>
                                             <input type="text" id="fullname" placeholder="Wayne Packing Pvt Ltd" value="{{$organization->org_name}}"
-                                                   class="form-control" name="organization[org_name]" required>
+                                                   class="form-control" name="organization[org_name]" readonly required>
                                             <span class="error-message">Please enter valid
                                             Organization Name</span>
                                         </div>
@@ -56,9 +56,18 @@
                                         <div class="form-input">
                                             <label class="phone-num-lable">Organization Type</label>
                                             <input type="text" id="fullname" placeholder="Pvt Ltd"
-                                                   class="form-control" name="organization[org_type]" value="{{$organization->org_type}}" required>
+                                                   class="form-control" name="organization[org_type]" value="{{$organization->org_type}}" readonly required>
                                             <span class="error-message">Please enter valid
                                             Organization Type</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-input">
+                                            <label class="full-name">Email ID</label>
+                                            <input type="email" id="email" placeholder="abc@email.com"
+                                                   class="form-control" name="email"  value="@if($branch){{$branch->email}}@endif" autocomplete="off" required>
+                                            <span class="error-message">Please enter valid
+                                                                Email ID</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
@@ -104,7 +113,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-6">
+                                    {{--<div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Lattitude</label>
                                             <input type="text" id="fullname" placeholder="57.2046° N" value="@if($branch){{$branch->lat}}@endif"
@@ -121,7 +130,7 @@
                                             <span class="error-message">Please enter valid
                                             Longitude</span>
                                         </div>
-                                    </div>
+                                    </div>--}}
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Landmark</label>
@@ -227,9 +236,22 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-input">
-                                            <label class="full-name">Commision</label>
-                                            <input type="number" id="fullname" placeholder="10%" value="{{$organization->commission}}"
-                                                   class="form-control" name="commission" required maxlength="2" readonly>
+                                            <label class="full-name">Base distance in km</label>
+                                            <span class="">
+                                            <input type="text" name="basedist" placeholder="Distance"
+                                                   class="form-control number" value="{{$organization->base_distance}}" required>
+                                            <span class="error-message">Please enter valid Distance</span>
+                                        </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-input">
+                                            <label class="full-name">Extra Base distance in km</label>
+                                            <span class="">
+                                            <input type="text" name="extrabasedist" placeholder="Extra Distance"
+                                                   class="form-control number" required value="{{$organization->additional_distance}}">
+                                            <span class="error-message">Please enter valid Distance</span>
+                                            </span>
                                         </div>
                                     </div>
                                     @if($branch && ($branch->ticket_status == CommonEnums::$YES))

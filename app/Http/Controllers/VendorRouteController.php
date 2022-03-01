@@ -320,15 +320,14 @@ class VendorRouteController extends Controller
             'organization.org_name' => 'required|string',
             'organization.org_type' => 'required|string',
             'organization.description' =>'required|string',
+            'basedist' =>'required',
+            'extrabasedist' =>'required',
 
             'address.address' => 'required|string',
-            'address.lat' => 'required|numeric',
-            'address.lng' => 'required|numeric',
             'address.landmark'=> 'required|string',
             'address.state' => 'required|string',
             'address.city' => 'required|string',
             'address.pincode' => 'required|min:6|max:6',
-            'zone' => 'required|integer',
             'service.*' =>'required|integer',
             'service_type' =>'required|string'
         ]);

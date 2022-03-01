@@ -2073,16 +2073,15 @@ $("body").on('keydown', ".number, .phone", function(event) {
         (event.keyCode == 46));
 });
 
-$("body").on('keypress', ".alphabet", function(event) {
-    var keyCode = (event.which) ? event.which : event.keyCode;
-    if ((keyCode <= 65 || keyCode >= 90) && (keyCode <= 97 || keyCode >= 123) && keyCode != 32)
-        return false;
-
-    return true;
-
+$("body").on('keydown', ".alphabet", function(event) {
+    return (event.ctrlKey || event.altKey ||
+        (65 <= event.keyCode && event.keyCode <= 90 && event.shiftKey == true) ||
+        (65 <= event.keyCode && event.keyCode <= 90) || (event.keyCode == 8) || (event.keyCode == 9) ||
+        (event.keyCode >= 34 && event.keyCode <= 40) ||
+        (event.keyCode == 46));
 });
 
-$("body").on('keypress', ".alphanum", function(event) {
+$("body").on('keydown', ".alphanum", function(event) {
     return (event.ctrlKey || event.altKey ||
         (47 <= event.keyCode && event.keyCode <= 58 && event.shiftKey == false) ||
         (95 <= event.keyCode && event.keyCode <= 106) ||

@@ -1185,6 +1185,14 @@ export function initDateBookPicker() {
 
         });
     }
+
+    if ($(".sliderdate").length) {
+        $('.sliderdate').datepicker({
+            multidate: false,
+            format: 'yyyy-mm-dd',
+            'startDate': 'today',
+        });
+    }
 }
 
 export function initDatePicker() {

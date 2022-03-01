@@ -991,7 +991,8 @@ class Route extends Controller
             'meta.pan_no'=>'required',
             'meta.adhar_no'=>'required',
             'meta.address_line1'=>'required',
-            'meta.address_line2'=>'required'
+            'meta.address_line2'=>'required',
+            'meta.dor'=>'nullable'
         ]);
 
         if($validation->fails())

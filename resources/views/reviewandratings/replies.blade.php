@@ -181,13 +181,13 @@
                                                             </div>
                                                         @endif
                                                     @endif
-                                                    @if($tickets->user_id)
+                                                    @if($tickets->user)
                                                         <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                                            <a href="#" class="cursor-pointer invsidebar a-underline" data-sidebar="{{ route('sidebar.customer',['id'=>$ticket_info->user->id]) }}">
-                                                                    {{$ticket_info->user->fname}} {{$ticket_info->user->lname}}
+                                                            <a href="#" class="cursor-pointer invsidebar a-underline" data-sidebar="{{ route('sidebar.customer',['id'=>$tickets->user->id]) }}">
+                                                                    {{$tickets->user->fname}} {{$tickets->user->lname}}
                                                             </a>
                                                         </div>
-                                                    @elseif($tickets->vendor_id)
+                                                    @elseif($tickets->vendor)
                                                             <a href="#" class="cursor-pointer invsidebar a-underline" data-sidebar="{{ route('sidebar.vendors',['id'=>json_decode($tickets->vendor, true)['organization_id']])}}">
                                                                 {{json_decode($tickets->vendor, true)['fname']}} {{json_decode($tickets->vendor, true)['lname']}}
                                                             </a>

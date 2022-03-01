@@ -328,12 +328,12 @@ class OrganisationController extends Controller
     public static function addBranch($data, $id, $vendor=false)
     {
         $org_email=Organization::where('email', $data['email'])->first();
-        $vendor_email=Vendor::where('email', $admin['email'])->first();
+        $vendor_email=Vendor::where('email', $data['email'])->first();
         if($org_email || $vendor_email)
             return Helper::response(false,"Email id is already exist in system");
 
         $org_phone=Organization::where('phone', $data['phone']['primary'])->first();
-        $vendor_phone=Vendor::where('phone',$admin['phone'])->first();
+        $vendor_phone=Vendor::where('phone', $data['phone']['primary'])->first();
         if($org_phone || $vendor_phone)
             return Helper::response(false,"Phone no is already exist in system");
 
@@ -364,13 +364,15 @@ class OrganisationController extends Controller
         $organizations->lng =$data['address']['lng']; */
         $organizations->lat =0;
         $organizations->lng =0;
-        $organizations->zone_id =$data['zone'];
+//        $organizations->zone_id =$data['zone'];
         $organizations->pincode =$data['address']['pincode'];
         $organizations->city =$data['address']['city'];
         $organizations->state =$data['address']['state'];
         $organizations->service_type =$data['service_type'];
         $organizations->meta =json_encode($meta);
-        $organizations->commission =$exist['commission'];
+        $organizations->commission =0;
+        $organizations->base_distance =$exist['basedist'];
+        $organizations->additional_distance =$exist['extrabasedist'];
         $organizations->verification_status = $exist['verification_status'];
         if($vendor) {
             $organizations->status =OrganizationEnums::$STATUS['pending_approval'];
@@ -431,7 +433,7 @@ class OrganisationController extends Controller
                 "lng"=>$data['address']['lng'],*/
                 "lat"=>0,
                 "lng"=>0,
-                "zone_id"=>$data['zone'],
+//                "zone_id"=>$data['zone'],
                 "pincode"=>$data['address']['pincode'],
                 "city"=>$data['address']['city'],
                 "state"=>$data['address']['state'],

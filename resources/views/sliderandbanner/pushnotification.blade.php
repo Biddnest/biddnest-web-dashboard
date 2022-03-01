@@ -60,7 +60,15 @@
                             <tbody class="mtop-20 f-13">
                             @foreach($notifications as $notification)
                                 <tr class="tb-border ">
-                                    <td>@if($notification->user){{$notification->user->fname}} {{$notification->user->lname}}@elseif($notification->vendor){{$notification->vendor->fname}} {{$notification->vendor->lname}}@endif</td>
+                                    <td>@if($notification->user)
+                                            {{$notification->user->fname}} {{$notification->user->lname}}
+                                        @elseif($notification->vendor)
+                                            {{$notification->vendor->fname}} {{$notification->vendor->lname}}
+                                        @elseif($notification->for == 'active_customers')
+                                            All Customers
+                                        @elseif($notification->for == 'active_vendors')
+                                            All Vendors
+                                        @endif</td>
 {{--                                    <td>@if($notification->vendor){{$notification->vendor->fname}} {{$notification->vendor->lname}}@endif</td>--}}
                                     <td>{{$notification->title}}</td>
                                     <td>{{$notification->desc}}</td>

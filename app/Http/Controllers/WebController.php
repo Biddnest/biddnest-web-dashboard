@@ -1583,7 +1583,7 @@ class WebController extends Controller
                 $service_status = [];
             }
             else{
-                $ticket_info['user'] = User::where(['id' => $ticket->user_id])->first();
+                $ticket_info = ['user'=>User::where(['id' => $ticket->user_id])->first()];
             }
         }
         elseif ($ticket->type == TicketEnums::$TYPE['service_request'])

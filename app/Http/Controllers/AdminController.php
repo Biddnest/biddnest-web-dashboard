@@ -153,7 +153,11 @@ class AdminController extends Controller
         $meta =json_encode(["manager_name" => $data['meta']['manager_name'], "alt_phone" => $data['meta']['alt_phone'], "gender"=>$data['meta']['gender'], "pan_no"=>$data['meta']['pan_no'], "aadha_no"=>$data['meta']['adhar_no'], "address_line1"=>$data['meta']['address_line1'], "address_line2"=>$data['meta']['address_line2'], "dor"=>$data['meta']['dor'],"education"=>$data['meta']['education']]);
 
         $admin =new Admin;
-        $admin->image=Helper::saveFile($image_man->make($data['image'])->resize(100,100)->encode('png', 75),"BD".$uniq.".png","admins/".$uniq.$data['fname']);
+        if($data['image'])
+            $admin->image=Helper::saveFile($image_man->make($data['image'])->resize(100,100)->encode('png', 75),"BD".$uniq.".png","admins/".$uniq.$data['fname']);
+        else
+            $admin->image= Helper::saveFile(Helper::generateAvatar($data['fname']." ".$data['lname']),"BD".$uniq.".png","admin/".$uniq.$data['fname']);
+
         $admin->fname=$data['fname'];
         $admin->lname=$data['lname'];
         $admin->username=$data['username'];
@@ -255,7 +259,7 @@ class AdminController extends Controller
 
                 foreach($city_zones as $zone_id){
                     $zones = new AdminZone;
-                    $zones->admin_id =$admin->id;
+                    $zones->admin_id =$data['id'];
                     $zones->zone_id = $zone_id;
                     $zones->save();
                 }
@@ -272,7 +276,7 @@ class AdminController extends Controller
                    $city_zones = Zone::where("city_id", $city)->pluck('id');
                     foreach($city_zones as $zone_id){
                         $zones = new AdminZone;
-                        $zones->admin_id =$admin->id;
+                        $zones->admin_id =$data['id'];
                         $zones->zone_id = $zone_id;
                         $zones->save();
                     }

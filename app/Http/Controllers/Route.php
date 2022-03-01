@@ -971,7 +971,7 @@ class Route extends Controller
     public function user_add(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'image'=>'required',
+            'image'=>'nullable|string',
             'fname'=>'required|string',
             'lname'=>'required|string',
             'username'=>'required',
@@ -986,7 +986,7 @@ class Route extends Controller
             'pincode'=>'required',
             'joinig_date'=>'required',
             'meta.manager_name'=>'required|string',
-            'meta.alt_phone'=>'required',
+            'meta.alt_phone'=>'nullable',
             'meta.gender'=>'required',
             'meta.pan_no'=>'required',
             'meta.adhar_no'=>'required',
@@ -1019,7 +1019,7 @@ class Route extends Controller
             'pincode'=>'required',
             'joinig_date'=>'required',
             'meta.manager_name'=>'required|string',
-            'meta.alt_phone'=>'required',
+            'meta.alt_phone'=>'nullable',
             'meta.gender'=>'required',
             'meta.pan_no'=>'required',
             'meta.adhar_no'=>'required',

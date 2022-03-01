@@ -55,11 +55,11 @@
                                         <img class="upload-preview" src="@if(!$users){{asset('static/images/upload-image.svg')}}@else{{$users->image}}@endif" alt=""/>
                                         <div class="ml-1">
                                             <div class="file-upload">
-                                                <input type="hidden" class="base-holder" name="image" value="@if($users){{$users->image}}@endif" required />
+                                                <input type="hidden" class="base-holder" name="image" value="@if($users){{$users->image}}@endif" />
                                                 <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                                                     UPLOAD IMAGE
                                                 </button>
-                                                <input type="file" accept=".png,.jpg,.jpeg" @if(!$users) required @endif/>
+                                                <input type="file" accept=".png,.jpg,.jpeg" />
                                             </div>
                                             <p class="text-black">Max File size: 1MB</p>
                                         </div>
@@ -156,7 +156,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="phone-num-lable">Alternate Phone Number</label>
-                                        <input type="tel" id="phone-1" placeholder="987654321" name="meta[alt_phone]" maxlength="10" minlength="10" class=" form-control" value="@if($users){{json_decode($users->meta, true)['alt_phone']}}@endif" required>
+                                        <input type="tel" id="phone-1" placeholder="987654321" name="meta[alt_phone]" maxlength="10" minlength="10" class=" form-control" value="@if($users){{json_decode($users->meta, true)['alt_phone']}}@endif">
                                         <span class="error-message">Please enter valid Phone number</span>
                                     </div>
                                 </div>

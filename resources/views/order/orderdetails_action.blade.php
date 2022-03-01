@@ -122,7 +122,7 @@
                                         <input type="hidden" name="public_booking_id" value="{{$booking->public_booking_id}}">
                                         <div class="p-0  border-top-2 order-cards">
                                             <div class="d-flex justify-content-center f-14 theme-text text-center ">
-                                                Please chose a movement type and <br>proceed to start bidding for this booking.
+                                                Please chose a movement type and <br>waiting for Final Price for this booking.
                                             </div>
                                             <div class="d-flex flex-row justify-content-around f-14 theme-text text-center p-10 quotation">
                                                 <div class="flex-column justify-content-center test" style="width: 30%;">

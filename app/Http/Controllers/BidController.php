@@ -439,8 +439,9 @@ class BidController extends Controller
             foreach($data['inventory'] as $key) {
                 $inventory_price = new BidInventory;
                 $inventory_price->booking_inventory_id = $key['booking_inventory_id'];
-                $inventory_price->bid_id= Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('id')[0];
-                $inventory_price->amount=$key['amount'];
+                $inventory_price->bid_id=Bid::where(['booking_id'=>Booking::where('public_booking_id', $data['public_booking_id'])->pluck('id')[0], 'organization_id'=>$data['organization_id']])->pluck('id')[0];
+                $inventory_price->amount = !$key['is_custom'] ? 0.00 : round($key['amount'],2);
+
                 $inventory_result = $inventory_price->save();
             }
 

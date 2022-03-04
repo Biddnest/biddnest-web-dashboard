@@ -40,6 +40,7 @@ class SettingsController extends Controller
                     "version"=>Settings::where("key", "app_version")->pluck('value')[0],
                 ]
             ],
+            "deep_link_url"=>"https://test.com",
             "keys"=>[
 //                "google_api_key"=>base64_encode(Settings::where("key", "google_api_key")->pluck('value')[0]),
                 "cancellation_reason_options"=>json_decode(Settings::where("key", "cancellation_reason_options")->pluck('value')[0], true)

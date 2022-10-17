@@ -23,6 +23,7 @@
         "pugx/shortid-php": "^0.7.0",
         "ramsey/uuid": "^4.1",
         "razorpay/razorpay": "^2.5",
+        "spatie/laravel-artisan-dd": "^2.3",
         "workerman/phpsocket.io": "^1.1"
     },
     "require-dev": {

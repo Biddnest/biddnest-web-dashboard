@@ -1915,7 +1915,7 @@ $("body").on('click', ".add-search-item", function(event) {
         title: "Success",
         text: "This item has been added.",
     });
-    $('.items-display').hide();
+    // $('.items-display').hide();
 
 });
 

@@ -213,7 +213,12 @@ class BookingsController extends Controller
 
         $generate_prices = InventoryController::generateOrganizationBasePrices($data, $booking_added);
         if (!$generate_prices) {
-            return Helper::response(false, "Couldn't generate prices.");
+            $help_text = ""; //only for debug purpose
+
+            if(env("APP_DEBUG"))
+                $help_text = "This error occured because one or more items in the list doesnt have any price listed by organization.";
+
+            return Helper::response(false, "Couldn't generate prices.". $help_text);
             DB::rollBack();
         }
 

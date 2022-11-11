@@ -24,27 +24,27 @@ export function redirectHard(url) {
 };
 
 export function tinyAlert(title, message) {
-    // toastr.error(message, title, {timeOut: 5000});
-    showToast(message, {
+    toastr.error(message, title, {timeOut: 5000});
+    /*showToast(message, {
         duration: 5000,
         background: '#a33a33',
         color: "#fff",
         borderRadius: '3px',
         close: false,
         progressBar: false
-    });
+    });*/
 }
 
 export function tinySuccessAlert(title, message) {
-    // toastr.success(message, title, {timeOut: 5000});
-    showToast(message, {
+    toastr.success(message, title, {timeOut: 5000});
+    /*showToast(message, {
         duration: 5000,
         background: '#20b2aa',
         color: "#fff",
         borderRadius: '3px',
         close: false,
         progressBar: false
-    });
+    });*/
 }
 
 export function megaAlert(title, message, type = "error") {

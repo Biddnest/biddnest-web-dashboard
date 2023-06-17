@@ -239,12 +239,14 @@
                                                 @endif
                                             </div>
                                             <div class="theme-text f-14 p-8">
-                                                @if($bidding && json_decode($bidding->meta, true)['moving_date'])
+                                                @if($bidding && \App\Helper::isValidJson($bidding->meta) && json_decode($bidding->meta, true)['moving_date'])
                                                         <div class="status-3">{{date("d M Y", strtotime(json_decode($bidding->meta, true)['moving_date']))}}</div>
                                                 @else
-                                                    @foreach(json_decode($booking->movement_dates, true) as $mdate)
-                                                        <span class="status-3">{{date("d M Y", strtotime($mdate['date']))}}</span>
-                                                    @endforeach
+                                                    @if(\App\Helper::isValidJson($booking->movement_dates))
+                                                        @foreach(json_decode($booking->movement_dates, true) as $mdate)
+                                                            <span class="status-3">{{date("d M Y", strtotime($mdate['date']))}}</span>
+                                                        @endforeach
+                                                    @endif
                                                 @endif
                                             </div>
                                         </div>

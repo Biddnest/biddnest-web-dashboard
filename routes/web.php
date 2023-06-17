@@ -177,11 +177,11 @@ Route::prefix('web/api')->group(function () {
 
     Route::get('/endbid',[Router::class,'end_bid'])->name("end_bid");
 
-    Route::get('user/search', [Router::class, 'searchUser'])->name("search_user");
-    Route::get('vendor/search', [Router::class, 'searchVendor'])->name("search_vendor");
-    Route::get('admin/search', [Router::class, 'searchadmin'])->name("search_admin");
-    Route::get('inventory/search', [Router::class, 'searchitem'])->name("search_inventory");
-    Route::get('order/serach', [Router::class, 'serachOrder'])->name("search_order");
+        Route::get('user/search', [Router::class, 'searchUser'])->name("search_user");
+        Route::get('vendor/search', [Router::class, 'searchVendor'])->name("search_vendor");
+        Route::get('admin/search', [Router::class, 'searchadmin'])->name("search_admin");
+        Route::get('inventory/search', [Router::class, 'searchitem'])->name("search_inventory");
+        Route::get('order/serach', [Router::class, 'serachOrder'])->name("search_order");
 
     Route::post('/pages',[Router::class,'page_add'])->name("page_add");
     Route::put('/pages',[Router::class,'page_edit'])->name("page_edit");
@@ -205,6 +205,7 @@ Route::prefix('web/api')->group(function () {
     Route::post('/reports/csv',[ExportController::class,'exoprtSale'])->name("export.csv");
     Route::get('/download/csv',[ExportController::class,'downloadCsv'])->name("download.csv");
 
+    Route::post('/booking/assign-va',[Router::class,'assignVirtualAssistant'])->name("api.va.assign");
     Route::post('/booking/assign-va',[Router::class,'assignVirtualAssistant'])->name("api.va.assign");
 
 

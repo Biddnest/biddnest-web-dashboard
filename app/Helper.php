@@ -129,4 +129,20 @@ class Helper
         return $aryRange;
     }
 
+    public static function isValidJson($jsonString) {
+
+        try{
+            $data = json_decode($jsonString);
+        }
+        catch(\Exception $e){
+            return false;
+        }
+
+        // Check if decoding was successful
+        if ($data === null && json_last_error() !== JSON_ERROR_NONE) {
+            return false; // Invalid JSON
+        }
+        return true; // Valid JSON
+    }
+
 }

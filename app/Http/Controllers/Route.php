@@ -1682,7 +1682,7 @@ class Route extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return CityController::updateCity($request->id, $request->name, $request->zones, $request->state);
+        return CityController::cities_edit($request->id, $request->name, $request->zones, $request->state);
     }
 
     public function city_status_update(Request $request)
